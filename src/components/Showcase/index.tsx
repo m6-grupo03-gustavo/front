@@ -10,7 +10,7 @@ export interface ICar {
     brand: string,
     model: string,
     year: string,
-    fuel: number,
+    fuel: string,
     value: number,
     description: string
     is_published: boolean

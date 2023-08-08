@@ -49,18 +49,7 @@ export const StyleContainerUserIfo = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
-    span{
-        text-transform: uppercase;
-        width: 35px;
-        height: 35px;
-        border-radius: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: var(--font-size-3);
-        background-color: var(--random2);
-        color: var(--grey9);
-    }
+
     h6{
         font-size: var(--font-size-4);
         color: var(--grey5);
