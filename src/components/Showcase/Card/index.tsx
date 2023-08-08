@@ -1,4 +1,5 @@
 // import { ICar } from ".."
+import { UserInitials } from "../../UserInitials"
 import { 
     StyleCardCar,
      StyleContainerImage, 
@@ -28,7 +29,7 @@ export default function CardCar(){
             </StyleContainerCarInfo>
 
             <StyleContainerUserIfo>
-                <span>nu</span>
+                <UserInitials userId={3} userName="Pedro"/>
                 <h6>Nome de Usuario</h6>
             </StyleContainerUserIfo>
 
