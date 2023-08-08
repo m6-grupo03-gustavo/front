@@ -1,7 +1,6 @@
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
-
-
+import ShowcaseCars from "../../components/Showcase"
 
 
 export const Home = () =>{
@@ -9,10 +8,14 @@ export const Home = () =>{
         <>
             <Header/>
             <main >
-                <section></section>
-                <section></section>
+                <div>
+                    <section>Filtros</section>
+                    <section>
+                        <ShowcaseCars/>
+                    </section>
+                </div>
+                <section>Pagination</section>
             </main>
-            <section></section>
             <Footer/>
         </>
     )
