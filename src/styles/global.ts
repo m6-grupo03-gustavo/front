@@ -106,7 +106,6 @@ body {
   color: var(--grey0);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
-  line-height: var(--line-height);
 }
 
 

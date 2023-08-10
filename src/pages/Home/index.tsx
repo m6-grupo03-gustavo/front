@@ -1,21 +1,23 @@
+import { FilterMain } from "../../components/Filters"
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
 import ShowcaseCars from "../../components/Showcase"
+import { StyleHomePage, StyleContainerShowcaseAndFilters } from "./style"
 
 
 export const Home = () =>{
     return(
         <>
             <Header/>
-            <main >
-                <div>
-                    <section>Filtros</section>
+            <StyleHomePage >
+                <StyleContainerShowcaseAndFilters>
+                    <section><FilterMain/></section>
                     <section>
                         <ShowcaseCars/>
                     </section>
-                </div>
+                </StyleContainerShowcaseAndFilters>
                 <section>Pagination</section>
-            </main>
+            </StyleHomePage>
             <Footer/>
         </>
     )
