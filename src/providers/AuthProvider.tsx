@@ -22,6 +22,8 @@ interface iAuthContextValues {
     setModal: React.Dispatch<React.SetStateAction<string>>
     cars: ICar[]
     setCars: React.Dispatch<React.SetStateAction<ICar[]>>
+    mobileFilterMain: boolean
+    setMobileFilterMain: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -31,7 +33,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
 
     const [modal, setModal] = useState<string>('off')
     const [cars, setCars] = useState<ICar[]>([])
-    
+    const [mobileFilterMain, setMobileFilterMain] = useState<boolean>(false)
 
 
 
@@ -40,7 +42,9 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             modal,
             setModal,
             cars,
-            setCars
+            setCars,
+            mobileFilterMain,
+            setMobileFilterMain
         }}>
             {children}
         </AuthContext.Provider>

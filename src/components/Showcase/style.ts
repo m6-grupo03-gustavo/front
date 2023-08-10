@@ -9,7 +9,7 @@ export const StyleShowcase =  styled.ul`
     padding: 50px;
     
    
-    @media(min-width: 800px){
+    @media(min-width: 1200px){
  
         flex-wrap: wrap;
     
