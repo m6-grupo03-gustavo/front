@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { BtnSubmit } from "../Buttons/btnSubmit";
 import { StyleDesktopFilters, StyleModalFilters } from "./style";
+import { FilterByBrand } from "./FilterByBrand";
 
 
 
@@ -57,6 +58,13 @@ const AllFilters = () =>{
         return(
             <>
                 {/*  componentes de filtro aqui */}
+                <FilterByBrand/>
+                <FilterByBrand/>
+                <FilterByBrand/>
+                <FilterByBrand/>
+                <FilterByBrand/>
+                <FilterByBrand/>
+                <FilterByBrand/>
             </>
         )
   

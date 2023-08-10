@@ -9,7 +9,8 @@ export const StyleModalFilters =  styled.div`
         top: 50vh;
         left: 50vw;
         z-index: 999;
-        min-height: 80vh;
+        height: 80vh;
+        overflow-y: auto;
         width: 350px;
         border-radius: var(--radius1);
         padding: 20px;
@@ -34,9 +35,9 @@ export const StyleModalFilters =  styled.div`
 
 export const StyleDesktopFilters =  styled.div`
         width: 350px;
-        height: 1600px;
+        height: fit-content;
         display: flex;
         flex-direction: column;
-        /* gap: 40px; */
-        background-color: red;
+        padding: 10px 20px;
+        gap: 20px;
 `
