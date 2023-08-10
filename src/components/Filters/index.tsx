@@ -59,12 +59,7 @@ const AllFilters = () =>{
             <>
                 {/*  componentes de filtro aqui */}
                 <FilterByBrand/>
-                <FilterByBrand/>
-                <FilterByBrand/>
-                <FilterByBrand/>
-                <FilterByBrand/>
-                <FilterByBrand/>
-                <FilterByBrand/>
+
             </>
         )
   
