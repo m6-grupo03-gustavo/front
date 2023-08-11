@@ -23,6 +23,11 @@ export const StyleContainerImage = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    img{
+
+        width: 100%;
+    }
 `
 
 export const StyleContainerCarInfo = styled.div`

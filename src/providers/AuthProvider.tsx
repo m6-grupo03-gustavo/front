@@ -4,6 +4,11 @@ interface iAuthProviderProps {
     children: ReactNode
 }
 
+export interface IImage{
+    id: number
+    url: string
+}
+
 export interface ICar {
     id: number,
     name: string,
@@ -15,6 +20,7 @@ export interface ICar {
     description: string
     is_published: boolean
     user_id: number
+    carImages: IImage[]
 }
 
 interface iAuthContextValues {
@@ -24,6 +30,8 @@ interface iAuthContextValues {
     setCars: React.Dispatch<React.SetStateAction<ICar[]>>
     mobileFilterMain: boolean
     setMobileFilterMain: React.Dispatch<React.SetStateAction<boolean>>
+    carsFilter: ICar[]
+    setCarsFilter: React.Dispatch<React.SetStateAction<ICar[]>>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -33,6 +41,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
 
     const [modal, setModal] = useState<string>('off')
     const [cars, setCars] = useState<ICar[]>([])
+    const [carsFilter, setCarsFilter] = useState<ICar[]>([])
     const [mobileFilterMain, setMobileFilterMain] = useState<boolean>(false)
 
 
@@ -44,7 +53,9 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             cars,
             setCars,
             mobileFilterMain,
-            setMobileFilterMain
+            setMobileFilterMain,
+            carsFilter,
+            setCarsFilter
         }}>
             {children}
         </AuthContext.Provider>
