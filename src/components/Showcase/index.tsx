@@ -9,31 +9,23 @@ import { ICar } from "../../providers/AuthProvider";
 
 
 export default  function ShowcaseCars(){
-    const { cars, setCars } = useAuth()
+    const {  setCars, setCarsFilter, carsFilter } = useAuth()
 
     useEffect(() => {
         (async () => {
-            const response = await api.get<ICar[]>('cars')
-
+            const response = await api.get<ICar[]>('car')
+            
             setCars(response.data)
+            setCarsFilter(response.data)
         })()
-    }, [cars])
+    }, [])
 
     return(
         <>
                 <StyleShowcase>
-                    {/* {cars.map((car) =>(
+                    {carsFilter.map((car) =>(
                         <CardCar key={car.id} car={car}/>    
-                    ))} */}
-                    <CardCar/>
-                    <CardCar/>
-                    <CardCar/>
-                    <CardCar/>
-                    <CardCar/>
-                    <CardCar/>
-                    <CardCar/>
-                    <CardCar/>
-                    <CardCar/>
+                    ))}
                 </StyleShowcase>
         </>
     ) 

@@ -1,4 +1,5 @@
 // import { ICar } from ".."
+import { ICar } from "../../../providers/AuthProvider"
 import { UserInitials } from "../../UserInitials"
 import { 
     StyleCardCar,
@@ -9,36 +10,36 @@ import {
 } from "./style"
 
 
-// interface ICarCardProps {
-//     car: ICar
-//   }
+interface ICarCardProps {
+    car: ICar
+  }
 
 
-export default function CardCar(){
+export default function CardCar({car}: ICarCardProps){
 
 
     return(
         <StyleCardCar>
             <StyleContainerImage>
-                <p>Imagem</p>
+                <img src={car.carImages[0].url} alt={car.name}/>
             </StyleContainerImage>
 
             <StyleContainerCarInfo>
-                <h3>Maserati - Ghibli</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit illo vitae omnis suscipit quidem. Quas aliquam saepe nemo tenetur. Culpa voluptatem impedit cum officia? Corrupti quos iste possimus commodi omnis!</p>
+                <h3>{car.name}</h3>
+                <p>{car.description}</p>
             </StyleContainerCarInfo>
 
             <StyleContainerUserIfo>
-                <UserInitials userId={3} userName="Pedro"/>
+                <UserInitials userId={car.id} userName={car.name}/>
                 <h6>Nome de Usuario</h6>
             </StyleContainerUserIfo>
 
             <StyleContainerDetailCar>
                 <div>
                     <span>0 KM</span>
-                    <span>2019</span>
+                    <span>{car.year}</span>
                 </div>
-                <p>R$ 00.000,00</p>
+                <p>{`RS ${car.value},00`}</p>
             </StyleContainerDetailCar>
         </StyleCardCar>
     ) 

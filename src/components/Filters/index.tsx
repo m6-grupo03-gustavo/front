@@ -3,6 +3,8 @@ import { useAuth } from "../../hooks/useAuth";
 import { BtnSubmit } from "../Buttons/btnSubmit";
 import { StyleDesktopFilters, StyleModalFilters } from "./style";
 import { FilterByBrand } from "./FilterByBrand";
+import { FilterByModel } from "./FilterByModel";
+
 
 
 
@@ -59,7 +61,7 @@ const AllFilters = () =>{
             <>
                 {/*  componentes de filtro aqui */}
                 <FilterByBrand/>
-
+                <FilterByModel/>
             </>
         )
   
