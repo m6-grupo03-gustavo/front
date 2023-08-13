@@ -9,23 +9,23 @@ import { StyleFilterByBrand } from "./style"
 export const FilterByBrand = () =>{
     const { cars, setCarsFilter } = useAuth()
 
-    const all = cars
-    const carsFiat = cars.filter(car => car.brand.toLowerCase() === 'fiat' )
-    const carsFord = cars.filter(car => car.brand.toLowerCase() === 'ford' )
-    const carsHonda = cars.filter(car => car.brand.toLowerCase() === 'honda' )
-    const carsPorsche = cars.filter(car => car.brand.toLowerCase() === 'porsche' )
-    const carsVolswagen = cars.filter(car => car.brand.toLowerCase() === 'volswagen' )
+    const allBrandsOfVehicles: string[] = []
+
+    cars.map((car) => {
+        if (!allBrandsOfVehicles.includes(car.brand)) {
+            allBrandsOfVehicles.push(car.brand);
+        }
+    })
 
     return(
         <StyleFilterByBrand>
             <h4>Marca</h4>
             <ul>
-                <li onClick={() => setCarsFilter(all)}>All</li>
-                <li onClick={() =>  setCarsFilter(carsFiat)}>Fiat</li>
-                <li onClick={() =>  setCarsFilter(carsFord)}>Ford</li>
-                <li onClick={() =>  setCarsFilter(carsHonda)}>Honda</li>
-                <li onClick={() =>  setCarsFilter(carsPorsche)}>Porsche</li>
-                <li onClick={() =>  setCarsFilter(carsVolswagen)}>Volswagen</li>
+                {allBrandsOfVehicles.map((brand) =>(
+                    <li onClick={() =>  setCarsFilter(cars.filter(car => car.brand == brand))}>
+                        {brand}
+                    </li>    
+                ))}
             </ul>
         </StyleFilterByBrand>
     )
