@@ -1,6 +1,6 @@
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { StyledContainerFormLogin } from "./style"
-import InputOutlined from '../input';
+import InputOutlined from '../Input';
 import { iLoginFormData, schemaLogin } from '../validator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BtnSubmit } from '../../Buttons/btnSubmit';
