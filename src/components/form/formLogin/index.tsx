@@ -1,7 +1,7 @@
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { StyledContainerFormLogin } from "./style"
 import InputOutlined from '../Input';
-import { iLoginFormData, schemaLogin } from '../validator';
+import { ILoginFormData, schemaLogin } from '../validator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BtnSubmit } from '../../Buttons/btnSubmit';
 // import { useAuth } from '../../../hooks/useAuth';
@@ -11,13 +11,13 @@ import { BtnSubmit } from '../../Buttons/btnSubmit';
 
 export default function FomrLogin (){
 
-    const { register, handleSubmit, reset } = useForm<iLoginFormData>({
+    const { register, handleSubmit, reset } = useForm<ILoginFormData>({
         resolver: zodResolver(schemaLogin)
     })
     
     // const { signIn } = useAuth()
     
-    const submit: SubmitHandler<iLoginFormData> = (data) =>{
+    const submit: SubmitHandler<ILoginFormData> = (data) =>{
         // signIn(data)
         console.log(data)
         reset()
