@@ -5,12 +5,12 @@ export const StyledContainerFormLogin = styled.section`
     position: relative;
     width: 35rem;
     /* height: 42rem; */
-    height: 70rem;
+    height: 40rem;
     background: var(--background);
     overflow: hidden;
     border-radius: var(--radius1);
     border: 1px solid var(--brand1);
-
+    transform-origin: center center;
 
 
     form{

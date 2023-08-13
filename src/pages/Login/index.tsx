@@ -1,12 +1,17 @@
+import FomrLogin from "../../components/Form/FormLogin"
 import { Header } from "../../components/Header"
+import { StyledContainerLoginPage } from "./style"
 
 
 
 
 export const Login = () =>{
     return(
-        <main >
-            <Header/>
-        </main>
+        <>
+        <Header/>
+        <StyledContainerLoginPage >
+            <FomrLogin/>
+        </StyledContainerLoginPage>
+        </>
     )
 }
