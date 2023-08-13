@@ -3,7 +3,6 @@ import { NavBar } from "./style"
 import { NavButtons } from "./NavButtons"
 import { Link, useNavigate } from "react-router-dom"
 import { NavButtonDesktop } from "./NavButtons/style"
-import { BtnAnchor } from "../Buttons/btnAnchor"
 
 
 
