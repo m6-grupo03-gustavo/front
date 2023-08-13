@@ -17,6 +17,8 @@ export interface ICar {
     year: string,
     fuel: string,
     value: number,
+    color: string,
+    km: number,
     description: string
     is_published: boolean
     user_id: number

@@ -19,7 +19,7 @@ export const StyleModalFilters =  styled.div`
         flex-direction: column;
         gap: 40px;
         box-shadow: 0px 35px 50px rgb(0, 0, 0, 0.80);
-        button{
+        span{
             border: none;
             width: 20px;
             height: 20px;

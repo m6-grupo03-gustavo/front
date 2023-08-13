@@ -4,6 +4,9 @@ import { BtnSubmit } from "../Buttons/btnSubmit";
 import { StyleDesktopFilters, StyleModalFilters } from "./style";
 import { FilterByBrand } from "./FilterByBrand";
 import { FilterByModel } from "./FilterByModel";
+import { FilterByColor } from "./FilterByColor";
+import { FilterByFuel } from "./FilterByFuel";
+import { FilterByYear } from "./FilterByYear";
 
 
 
@@ -11,6 +14,7 @@ import { FilterByModel } from "./FilterByModel";
 export const FilterMain = () =>{
     const { mobileFilterMain, setMobileFilterMain } = useAuth()
     const [width, setWidth] = useState(window.innerWidth);
+
 
     useEffect(() => {
         //  função que atualize o estado com a nova largura da tela
@@ -39,7 +43,7 @@ export const FilterMain = () =>{
         return(
             <StyleModalFilters>
                     {/* Transformar em componente */}
-                    <button onClick={() => setMobileFilterMain(false)} >X</button>
+                    <span onClick={() => setMobileFilterMain(false)} >X</span>
                     <AllFilters/>
             </StyleModalFilters>
         )
@@ -55,13 +59,18 @@ export const FilterMain = () =>{
 
 
 const AllFilters = () =>{
-
+    const { cars, setCarsFilter } = useAuth()
         
         return(
             <>
                 {/*  componentes de filtro aqui */}
                 <FilterByBrand/>
                 <FilterByModel/>
+                <FilterByColor/>
+                <FilterByFuel/>
+                <FilterByYear/>
+
+                <BtnSubmit onClick={() => setCarsFilter(cars)} text={"Limpar filtros"} typeStyle={"brand1"}/>
             </>
         )
   
