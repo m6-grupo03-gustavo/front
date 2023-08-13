@@ -109,7 +109,25 @@ body {
   overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  height: 2px;
 
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--brand1);
+  border-radius: var(--radius2);
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--brand1);
+}
 
 @media (min-width: 700px) {
   html, body, div, span, applet, object, iframe,
