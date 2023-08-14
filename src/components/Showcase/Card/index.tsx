@@ -36,7 +36,7 @@ export default function CardCar({car}: ICarCardProps){
 
             <StyleContainerDetailCar>
                 <div>
-                    <span>0 KM</span>
+                    <span>{car.km}KM</span>
                     <span>{car.year}</span>
                 </div>
                 <p>{`RS ${car.value},00`}</p>

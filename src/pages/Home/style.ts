@@ -33,8 +33,7 @@ export const StyleHomePage =  styled.main`
     @media(min-width: 700px){
             .banner {
                 height: 50vh;
-                
-                background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), transparent) url("/Photo-background.svg") no-repeat;
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), transparent) url("/Photo-background.svg") no-repeat ;
             }
         }
     `

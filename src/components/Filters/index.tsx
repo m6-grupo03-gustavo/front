@@ -7,6 +7,8 @@ import { FilterByModel } from "./FilterByModel";
 import { FilterByColor } from "./FilterByColor";
 import { FilterByFuel } from "./FilterByFuel";
 import { FilterByYear } from "./FilterByYear";
+import { FilterByPrice } from "./FilterByPrice";
+import { FilterByKM } from "./FilterByKm";
 
 
 
@@ -69,7 +71,8 @@ const AllFilters = () =>{
                 <FilterByColor/>
                 <FilterByFuel/>
                 <FilterByYear/>
-
+                <FilterByKM/>
+                <FilterByPrice/>
                 <BtnSubmit onClick={() => setCarsFilter(cars)} text={"Limpar filtros"} typeStyle={"brand1"}/>
             </>
         )

@@ -2,7 +2,7 @@
 
 import styled from 'styled-components'
 
-export const StyleFilterByPrice =  styled.div`
+export const StyleFilterByKM =  styled.div`
 
     display: flex;
     flex-direction: column;
@@ -16,14 +16,13 @@ export const StyleFilterByPrice =  styled.div`
 
 `
 
-export const StyledPriceInput = styled.section`
+export const StyledKMInput = styled.section`
 
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin: 30px 0 35px;
         gap: 10px;
-
         
         div{
             height: 45px;
@@ -60,7 +59,7 @@ export const StyledPriceInput = styled.section`
  
 `
 
-export const StyleFilterSliderByPrice =  styled.div`
+export const StyleFilterSliderByKM =  styled.div`
     height: 5px;
     width: 300px;
     background-color: var(--grey6);
