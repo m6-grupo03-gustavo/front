@@ -36,7 +36,7 @@ export const StyleHomePage =  styled.main`
                 background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), transparent) url("/Photo-background.svg") no-repeat ;
             }
         }
-    `
+`
 
 export const StyleContainerShowcaseAndFilters =  styled.div`
         display: flex;

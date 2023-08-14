@@ -1,3 +1,4 @@
+import { Banner } from "../../components/Banner"
 import { FilterMain } from "../../components/Filters"
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
@@ -10,10 +11,7 @@ export const Home = () =>{
         <>
             <Header/>
             <StyleHomePage >
-                <div className="banner">
-                    <h1>Motors Shop</h1>
-                    <h3>A melhor plataforma de anúncios de carros do país</h3>
-                </div>
+                <Banner/>
                 <StyleContainerShowcaseAndFilters>
                     <section><FilterMain/></section>
                     <section>
