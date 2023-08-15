@@ -10,8 +10,8 @@ export const FilterByModel = () =>{
 
 
     cars.map((car) => {
-        if (!allModelsOfVehicles.includes(car.name)) {
-            allModelsOfVehicles.push(car.name);
+        if (!allModelsOfVehicles.includes(car.name.toLowerCase())) {
+            allModelsOfVehicles.push(car.name.toLowerCase());
         }
     })
 
@@ -20,7 +20,7 @@ export const FilterByModel = () =>{
             <h4>Modelo</h4>
             <ul>
                 {allModelsOfVehicles.map((name) =>(
-                    <li onClick={() =>  setCarsFilter(cars.filter(car => car.name == name))}>
+                    <li onClick={() =>  setCarsFilter(cars.filter(car => car.name.toLowerCase() == name))}>
                         {name}
                     </li>    
                 ))}

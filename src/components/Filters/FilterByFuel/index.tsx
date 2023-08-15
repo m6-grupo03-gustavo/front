@@ -13,8 +13,8 @@ export const FilterByFuel = () =>{
 
     
     cars.map((car) => {
-        if (!allFuelsOfVehicles.includes(car.fuel)) {
-            allFuelsOfVehicles.push(car.fuel);
+        if (!allFuelsOfVehicles.includes(car.fuel.toLowerCase())) {
+            allFuelsOfVehicles.push(car.fuel.toLowerCase());
         }
     })
     console.log(allFuelsOfVehicles)
@@ -23,7 +23,7 @@ export const FilterByFuel = () =>{
             <h4>Combustível</h4>
             <ul>
                 {allFuelsOfVehicles.map((fuel) =>(
-                    <li onClick={() =>  setCarsFilter(cars.filter(car => car.fuel == fuel))}>
+                    <li onClick={() =>  setCarsFilter(cars.filter(car => car.fuel.toLowerCase() == fuel))}>
                         {fuel}
                     </li>    
                 ))}

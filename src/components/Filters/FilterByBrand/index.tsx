@@ -12,8 +12,8 @@ export const FilterByBrand = () =>{
     const allBrandsOfVehicles: string[] = []
 
     cars.map((car) => {
-        if (!allBrandsOfVehicles.includes(car.brand)) {
-            allBrandsOfVehicles.push(car.brand);
+        if (!allBrandsOfVehicles.includes(car.brand.toLowerCase())) {
+            allBrandsOfVehicles.push(car.brand.toLowerCase());
         }
     })
 
@@ -22,7 +22,7 @@ export const FilterByBrand = () =>{
             <h4>Marca</h4>
             <ul>
                 {allBrandsOfVehicles.map((brand) =>(
-                    <li onClick={() =>  setCarsFilter(cars.filter(car => car.brand == brand))}>
+                    <li onClick={() =>  setCarsFilter(cars.filter(car => car.brand.toLowerCase() == brand))}>
                         {brand}
                     </li>    
                 ))}
