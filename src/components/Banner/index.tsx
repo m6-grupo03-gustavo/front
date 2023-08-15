@@ -9,6 +9,7 @@ import 'swiper/css/scrollbar';
 import car1 from '../../../public/car1.jpg'
 import car2 from '../../../public/car2.jpg'
 import car3 from '../../../public/car3.jpg'
+import car4 from '../../../public/car5.jpg'
 
 
 export const Banner = () =>{
@@ -41,6 +42,13 @@ export const Banner = () =>{
                 <StyleBanner>
                     <img src={car3} alt="car banner" />
                     <div></div>
+                </StyleBanner>
+            </SwiperSlide>
+
+            <SwiperSlide>
+                <StyleBanner>
+                    <img src={car4} alt="car banner" />
+
                 </StyleBanner>
             </SwiperSlide>
         </Swiper>
