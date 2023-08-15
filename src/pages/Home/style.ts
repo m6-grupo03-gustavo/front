@@ -12,6 +12,8 @@ export const StyleContainerShowcaseAndFilters =  styled.div`
         section:nth-child(1){
             margin: auto;
         }
+
+
         
         
         @media(min-width: 1200px){
@@ -23,4 +25,12 @@ export const StyleContainerShowcaseAndFilters =  styled.div`
                 margin-top: 50px;
             }
         }
+`
+
+
+export const StyleShopCars = styled.div`
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+
 `

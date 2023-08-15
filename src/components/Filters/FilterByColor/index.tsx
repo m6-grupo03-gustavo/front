@@ -12,8 +12,8 @@ export const FilterByColor = () =>{
     const allColorOfVehicles: string[] = []
 
     cars.map((car) => {
-        if (!allColorOfVehicles.includes(car.color)) {
-            allColorOfVehicles.push(car.color);
+        if (!allColorOfVehicles.includes(car.color.toLowerCase())) {
+            allColorOfVehicles.push(car.color.toLowerCase());
         }
     })
 
@@ -23,7 +23,7 @@ export const FilterByColor = () =>{
             <h4>Cor</h4>
             <ul>
                 {allColorOfVehicles.map((color) =>(
-                    <li onClick={() =>  setCarsFilter(cars.filter(car => car.color == color))}>
+                    <li onClick={() =>  setCarsFilter(cars.filter(car => car.color.toLowerCase() == color))}>
                         {color}
                     </li>    
                 ))}

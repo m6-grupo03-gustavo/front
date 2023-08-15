@@ -25,6 +25,13 @@ export interface ICar {
     carImages: IImage[]
 }
 
+export interface IResponseGetCars{
+    prevPage: string | null
+    nextPage: string | null
+    count: number
+    data: ICar[]
+}
+
 interface iAuthContextValues {
     modal: string
     setModal: React.Dispatch<React.SetStateAction<string>>
@@ -34,6 +41,10 @@ interface iAuthContextValues {
     setMobileFilterMain: React.Dispatch<React.SetStateAction<boolean>>
     carsFilter: ICar[]
     setCarsFilter: React.Dispatch<React.SetStateAction<ICar[]>>
+    page: number
+    setPage: React.Dispatch<React.SetStateAction<number>>
+    responseGetCars: IResponseGetCars | null
+    setResponseGetCars: React.Dispatch<React.SetStateAction<IResponseGetCars | null>>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -45,6 +56,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const [cars, setCars] = useState<ICar[]>([])
     const [carsFilter, setCarsFilter] = useState<ICar[]>([])
     const [mobileFilterMain, setMobileFilterMain] = useState<boolean>(false)
+    const [page, setPage] = useState<number>(1)
+    const [responseGetCars, setResponseGetCars] = useState<IResponseGetCars | null>(null)
 
 
 
@@ -57,7 +70,11 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             mobileFilterMain,
             setMobileFilterMain,
             carsFilter,
-            setCarsFilter
+            setCarsFilter, 
+            page,
+            setPage,
+            responseGetCars,
+            setResponseGetCars
         }}>
             {children}
         </AuthContext.Provider>
