@@ -1,3 +1,4 @@
+import { AxiosInterceptor } from "./AxiosInterceptor"
 import { AuthProvider } from "./providers/AuthProvider"
 import { RoutesMain } from "./routes"
 import GlobalStyle from "./styles/global"
@@ -7,9 +8,11 @@ function App() {
     <main>
       <GlobalStyle/>
       
-      <AuthProvider>
-        <RoutesMain/>
-      </AuthProvider>
+      <AxiosInterceptor>
+        <AuthProvider>
+          <RoutesMain/>
+        </AuthProvider>
+      </AxiosInterceptor>
     </main>
   )
 }

@@ -2,9 +2,12 @@ import { Banner } from "../../components/Banner"
 import { FilterMain } from "../../components/Filters"
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
+// import { ModalError } from "../../components/Modals/ModalError"
 import { Pagination } from "../../components/Pagination"
 import ShowcaseCars from "../../components/Showcase"
 import { StyleHomePage, StyleContainerShowcaseAndFilters, StyleShopCars } from "./style"
+
+
 
 
 export const Home = () =>{
@@ -22,6 +25,7 @@ export const Home = () =>{
                 </StyleContainerShowcaseAndFilters>
             </StyleHomePage>
             <Footer/>
+            {/* <ModalError/> */}
         </>
     )
 }
