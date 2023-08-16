@@ -4,7 +4,7 @@ import InputOutlined from '../Input';
 import { IRegisterFormData, schemaRegister } from '../validator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BtnSubmit } from '../../Buttons/btnSubmit';
-// import { useAuth } from '../../../hooks/useAuth';
+import { useAuth } from '../../../hooks/useAuth';
 
 
 
@@ -15,11 +15,10 @@ export default function FomrRegister (){
         resolver: zodResolver(schemaRegister)
     })
     
-    // const { register } = useAuth()
+    const { userRegister } = useAuth()
     
     const submit: SubmitHandler<IRegisterFormData> = (data) =>{
-        // register(data)
-        console.log(data)
+        userRegister(data)
         reset()
     }
 
