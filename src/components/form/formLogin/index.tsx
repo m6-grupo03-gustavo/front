@@ -4,7 +4,7 @@ import InputOutlined from '../Input';
 import { ILoginFormData, schemaLogin } from '../validator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BtnSubmit } from '../../Buttons/btnSubmit';
-// import { useAuth } from '../../../hooks/useAuth';
+import { useAuth } from '../../../hooks/useAuth';
 
 
 
@@ -15,11 +15,10 @@ export default function FomrLogin (){
         resolver: zodResolver(schemaLogin)
     })
     
-    // const { signIn } = useAuth()
+    const { signIn } = useAuth()
     
     const submit: SubmitHandler<ILoginFormData> = (data) =>{
-        // signIn(data)
-        console.log(data)
+        signIn(data)
         reset()
     }
 

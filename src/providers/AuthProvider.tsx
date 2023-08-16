@@ -1,4 +1,9 @@
 import { ReactNode, createContext, useState } from "react"
+import { api } from "../service/api"
+import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom";
+import { ILoginFormData, IRegisterFormData } from "../components/Form/validator";
+
 
 interface iAuthProviderProps {
     children: ReactNode
@@ -7,6 +12,29 @@ interface iAuthProviderProps {
 export interface IImage{
     id: number
     url: string
+}
+
+interface ILoginResponse {
+    token: string
+}
+
+interface IRegisterResponse{
+    id: number,
+    name: string,
+    email: string,
+    password: string,
+    phone: string,
+    cpf: string,
+    birthdate: string,
+    description: string,
+    zipcode: string,
+    state: string,
+    city: string,
+    street: string,
+    number: number,
+    complement: string,
+    register_date: string,
+    account_state: string
 }
 
 export interface ICar {
@@ -45,13 +73,18 @@ interface iAuthContextValues {
     setPage: React.Dispatch<React.SetStateAction<number>>
     responseGetCars: IResponseGetCars | null
     setResponseGetCars: React.Dispatch<React.SetStateAction<IResponseGetCars | null>>
+    userRegister: (data: IRegisterFormData) => Promise<void>
+    loading: boolean
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+    signIn:  (data: ILoginFormData) => Promise<void>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
 
 export const AuthProvider = ({ children }: iAuthProviderProps) => {
 
-
+    const navigate = useNavigate()
+    const [loading, setLoading] = useState(true)
     const [modal, setModal] = useState<string>('off')
     const [cars, setCars] = useState<ICar[]>([])
     const [carsFilter, setCarsFilter] = useState<ICar[]>([])
@@ -59,6 +92,37 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const [page, setPage] = useState<number>(1)
     const [responseGetCars, setResponseGetCars] = useState<IResponseGetCars | null>(null)
 
+    const signIn = async (data: ILoginFormData) => {
+        try {
+
+            const response = await api.post<ILoginResponse>("/login", data)
+
+            const { token } = response.data
+
+
+            api.defaults.headers.common.Authorization = `Bearer ${token}`
+            localStorage.setItem("@fipe:token", token)
+            setLoading(false)
+
+            toast.success('User logged in successfully')
+            navigate("dashboard")
+        }
+        catch (error) {
+            toast.error('Incorrect data')
+            console.log(error)
+        }
+    }
+
+    const userRegister = async (data : IRegisterFormData) => {
+        try{
+            await api.post<IRegisterResponse>('/user', data)
+            toast.success('User created successfully')
+            navigate('login')
+        }catch (error){
+            toast.error('Email already exists')
+            console.error(error)
+        }
+    }    
 
 
     return (
@@ -74,7 +138,11 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             page,
             setPage,
             responseGetCars,
-            setResponseGetCars
+            setResponseGetCars,
+            userRegister,
+            loading,
+            setLoading,
+            signIn
         }}>
             {children}
         </AuthContext.Provider>
