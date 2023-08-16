@@ -22,7 +22,7 @@ export const schemaRegister = z.object({
     state: z.string(),
     city: z.string(),
     street: z.string(),
-    number: z.number(),
+    number: z.string(),
     complement: z.string().optional(),
     account_state: z.enum([AccountState.Buyer, AccountState.Saller])
 })

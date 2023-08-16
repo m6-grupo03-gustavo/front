@@ -4,7 +4,7 @@ import { InputHTMLAttributes } from "react";
 
 interface IImputOutlined extends InputHTMLAttributes<HTMLInputElement> {
     id: string;
-    type: "text" | "password" | "email";
+    type: "text" | "password" | "email" | 'number';
     label: string;
     register: UseFormRegisterReturn<string>;
 }

@@ -5,6 +5,7 @@ import { IRegisterFormData, schemaRegister } from '../validator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BtnSubmit } from '../../Buttons/btnSubmit';
 import { useAuth } from '../../../hooks/useAuth';
+import SelectOutlined from '../Select';
 
 
 
@@ -14,13 +15,19 @@ export default function FomrRegister (){
     const { register, handleSubmit, reset } = useForm<IRegisterFormData>({
         resolver: zodResolver(schemaRegister)
     })
-    
-    const { userRegister } = useAuth()
+
+    const { userRegister } = useAuth()  
     
     const submit: SubmitHandler<IRegisterFormData> = (data) =>{
+        // console.log(data)
         userRegister(data)
         reset()
     }
+
+    const options = [
+        { value: 'buyer', label: 'Comprador' },
+        { value: 'seller', label: 'Vendedor' },
+      ];
 
     return(
         <StyledContainerFormRegister>
@@ -42,10 +49,10 @@ export default function FomrRegister (){
 
                 <div>
                     <InputOutlined id="number" type="text" label='Numero' register={register('number')}/>
+
                     <InputOutlined id="complement" type="text" label='Complemento' register={register('complement')}/>
                 </div>
-                
-                <InputOutlined id="account_state" type="text" label='tipo de conta' register={register('account_state')}/>
+                <SelectOutlined id="mySelect" register={register('account_state')} label="Tipo de conta" options={options} />
 
                 <BtnSubmit text='Register' typeStyle='brand1'/>
             </form>
