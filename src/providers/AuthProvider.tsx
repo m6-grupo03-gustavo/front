@@ -2,7 +2,7 @@ import { ReactNode, createContext, useState } from "react"
 import { api } from "../service/api"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
-import { ILoginFormData, IRegisterFormData } from "../components/Form/validator";
+import { AccountState, ILoginFormData, IRegisterFormData } from "../components/Form/validator";
 
 
 interface iAuthProviderProps {
@@ -33,8 +33,8 @@ interface IRegisterResponse{
     street: string,
     number: number,
     complement: string,
-    register_date: string,
-    account_state: string
+    register_date: Date,
+    account_state: AccountState
 }
 
 export interface ICar {
@@ -94,16 +94,11 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
 
     const signIn = async (data: ILoginFormData) => {
         try {
-
             const response = await api.post<ILoginResponse>("/login", data)
-
             const { token } = response.data
-
-
             api.defaults.headers.common.Authorization = `Bearer ${token}`
             localStorage.setItem("@fipe:token", token)
             setLoading(false)
-
             toast.success('User logged in successfully')
             navigate("dashboard")
         }
