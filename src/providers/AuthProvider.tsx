@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from "react"
+import { ReactNode, createContext, useEffect, useState } from "react"
 import { api } from "../service/api"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
@@ -91,6 +91,20 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const [mobileFilterMain, setMobileFilterMain] = useState<boolean>(false)
     const [page, setPage] = useState<number>(1)
     const [responseGetCars, setResponseGetCars] = useState<IResponseGetCars | null>(null)
+
+    useEffect(() => {
+        const token = localStorage.getItem("@fipe:token")
+
+        if (!token) {
+            setLoading(false)
+            return
+        }
+
+        api.defaults.headers.common.Authorization = `Bearer ${token}`
+        setLoading(false)
+
+    }, [])
+
 
     const signIn = async (data: ILoginFormData) => {
         try {
