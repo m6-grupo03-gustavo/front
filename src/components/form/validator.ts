@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-enum AccountState {
+export enum AccountState {
     Buyer = "buyer",
     Saller = "saller",
   }
@@ -24,8 +24,7 @@ export const schemaRegister = z.object({
     street: z.string(),
     number: z.number(),
     complement: z.string().optional(),
-    register_date: z.string(),
-    account_state: z.string()
+    account_state: z.enum([AccountState.Buyer, AccountState.Saller])
 })
 
 export type ILoginFormData = z.infer<typeof schemaLogin>

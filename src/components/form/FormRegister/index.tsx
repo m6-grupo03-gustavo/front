@@ -45,8 +45,7 @@ export default function FomrRegister (){
                     <InputOutlined id="complement" type="text" label='Complemento' register={register('complement')}/>
                 </div>
                 
-                <InputOutlined id="register_date" type="text" label='Data de registro' register={register('register_date')}/>
-                <InputOutlined id="account_state" type="text" label='Data de registro' register={register('account_state')}/>
+                <InputOutlined id="account_state" type="text" label='tipo de conta' register={register('account_state')}/>
 
                 <BtnSubmit text='Register' typeStyle='brand1'/>
             </form>
