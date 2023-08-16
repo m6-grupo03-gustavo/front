@@ -31,7 +31,7 @@ interface IRegisterResponse{
     state: string,
     city: string,
     street: string,
-    number: number,
+    number: string,
     complement: string,
     register_date: Date,
     account_state: AccountState
