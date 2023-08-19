@@ -1,36 +1,18 @@
 import styled from 'styled-components'
 
 
-export const StyledContainerFormRegister = styled.section`
-    position: relative;
-    width: 35rem;
-    height: 80vh;
-    overflow-y: auto;
-    background: var(--background);
-    border-radius: var(--radius1);
-    border: 1px solid var(--brand1);
-    transform-origin: center center;
-
-
+export const StyledContainerFormRegisterCar = styled.section`
     form{
-        position: absolute;
-        inset: 0.4rem;
-        background: var(--background);
-        padding: 5rem 3rem;
-        border-radius: 0.8rem;
+        width: 32rem;
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
-        z-index: 3;
-
+        align-items: center;
         p{
             color: var(--alert1);
             font-weight: 500;
             text-align: center;
             font-size: var(--font-size-4);
         }
-
-
         h2{
             color: var(--brand1);
             font-weight: 500;
@@ -48,7 +30,13 @@ export const StyledContainerFormRegister = styled.section`
             justify-content: space-between;
             align-items: center;
             gap: 15px;
+            max-width: 88%;
         }
-
     }
+
+
+
+
+
+    
 `
