@@ -9,4 +9,11 @@ export const NavBar = styled.div`
     height: 10vh;
 
     padding: 0px 2.3rem 0px 2.3rem;
+
+    border-bottom: 2px solid var(--grey7);
+
+
+    #logo {
+        cursor: pointer;
+    }
 `
