@@ -5,7 +5,7 @@ export const StyleModalError = styled.div`
     position: relative;
     width: 100vw;
     height: 100vh;
-    background: rgb(3, 19, 33, 0.3);
+    background: rgb(3, 19, 33, 0.8);
     z-index: 1999;
     div{
         position: absolute;

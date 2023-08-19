@@ -4,9 +4,12 @@ import { Header } from "../../components/Header"
 import { Card, Container, ProfileAdsList, ProfileInfo } from "./style"
 import { api } from "../../service/api"
 import jwt_decode from "jwt-decode"
+import { ModalRegisterCar } from "../../components/Modals/ModalRegisterCar"
+import { useAuth } from "../../hooks/useAuth"
 
 
 export const Dashboard = () =>{
+    const { setModal } = useAuth()
     const [user, setUser] = useState({})
     const [cars, setCars] = useState([])
     const decodedToken: any = jwt_decode(localStorage.getItem("@fipe:token"))
@@ -35,10 +38,10 @@ export const Dashboard = () =>{
                         <span>{user.account_state == "buyer" ? "Comprador" : "Anunciante"}</span>
                     </div>
                     <p>{user.description}</p>
-                    <button>Criar anuncio</button>
+                    <button onClick={() => setModal('registerCar')}>Criar anuncio</button>
                 </ProfileInfo>
                 <ProfileAdsList>
-                    {/* <li>{cars[0].name}</li> */}
+           
                    
                 </ProfileAdsList>
             </Container>

@@ -11,7 +11,7 @@ import { useAuth } from '../../../hooks/useAuth';
 
 export default function FomrLogin (){
 
-    const { register, handleSubmit, reset } = useForm<ILoginFormData>({
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<ILoginFormData>({
         resolver: zodResolver(schemaLogin)
     })
     
@@ -27,7 +27,9 @@ export default function FomrLogin (){
             <form onSubmit={handleSubmit(submit)}>
                 <h2>Sign <span>in</span></h2>
                 <InputOutlined id="email" type="text" label='Email' register={register('email')}/>
+                {errors.email && <p>{errors.email.message}</p>}
                 <InputOutlined id="password" type="password" label='Password'  register={register('password')}/>
+                {errors.password && <p>{errors.password.message}</p>}
                 <a href='/register'>Create new account</a>
                 <BtnSubmit text='Login' typeStyle='brand1'/>
             </form>
