@@ -35,6 +35,7 @@ export const Banner = () =>{
             <SwiperSlide>
                 <StyleBanner>
                     <img src={car2} alt="car banner" />
+                    <div></div>
                 </StyleBanner>
             </SwiperSlide>
 
@@ -48,7 +49,7 @@ export const Banner = () =>{
             <SwiperSlide>
                 <StyleBanner>
                     <img src={car4} alt="car banner" />
-
+                    <div></div>
                 </StyleBanner>
             </SwiperSlide>
         </Swiper>

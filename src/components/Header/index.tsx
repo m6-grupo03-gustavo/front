@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { NavBar } from "./style"
+import { NavBar, NavBarHomePage } from "./style"
 import { NavButtons } from "./NavButtons"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { NavButtonDesktop } from "./NavButtons/style"
 
 
@@ -10,7 +10,8 @@ export const Header = () =>{
     const [isOpenNavButtons, setIsOpenNavButtons] = useState(false)
     const navigate = useNavigate()
     const [width, setWidth] = useState(window.innerWidth);
-
+    const location = useLocation()
+    console.log(location.pathname)
     useEffect(() => {
         //  função que atualize o estado com a nova largura da tela
         const handleResize = () => {
@@ -26,25 +27,49 @@ export const Header = () =>{
         };
       }, []);
 
-      if(width <= 1200){
+      if(width <= 1200 && location.pathname == '/'){
         
           return(
               <>
-                  <NavBar>
+                  <NavBarHomePage>
+                    <div>
+
                       <img src="/Logo.svg" onClick={() => navigate("/")}/>
+                    </div>
                       
                       {
                           !isOpenNavButtons ? <img src="/bars.svg" onClick={() => setIsOpenNavButtons(!isOpenNavButtons)} id="bars"/> : <img src="/xmark.svg" onClick={() => setIsOpenNavButtons(!isOpenNavButtons)}/>
                       }
       
-                  </NavBar>
+                  </NavBarHomePage>
       
                   {
                       isOpenNavButtons && <NavButtons/>
                   }
               </>
           )
-    } else {
+    } else if(width <= 1200){
+        return(
+            <>
+                <NavBar>
+                    <img src="/Logo.svg" onClick={() => navigate("/")}/>
+                    
+                    {
+                        !isOpenNavButtons ? <img src="/bars.svg" onClick={() => setIsOpenNavButtons(!isOpenNavButtons)} id="bars"/> : <img src="/xmark.svg" onClick={() => setIsOpenNavButtons(!isOpenNavButtons)}/>
+                    }
+    
+                </NavBar>
+    
+                {
+                    isOpenNavButtons && <NavButtons/>
+                }
+            </>
+        )
+    }
+    
+    
+    
+    else {
         return (
             <>
             <NavBar>
