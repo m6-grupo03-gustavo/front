@@ -25,7 +25,7 @@ export default function CardCar({car}: ICarCardProps){
             </StyleContainerImage>
 
             <StyleContainerCarInfo>
-                <h3>{car.name}</h3>
+                <h3>{car.model}</h3>
                 <p>{car.description}</p>
             </StyleContainerCarInfo>
 
