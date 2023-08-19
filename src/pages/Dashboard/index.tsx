@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
-import { Card, Container, ProfileAdsList, ProfileInfo } from "./style"
+import { Container, ProfileAdsList, ProfileInfo } from "./style"
 import { api } from "../../service/api"
 import jwt_decode from "jwt-decode"
 import { ModalRegisterCar } from "../../components/Modals/ModalRegisterCar"
@@ -12,7 +12,7 @@ export const Dashboard = () =>{
     const { setModal } = useAuth()
     const [user, setUser] = useState({})
     const [cars, setCars] = useState([])
-    const decodedToken: any = jwt_decode(localStorage.getItem("@fipe:token"))
+    const decodedToken = jwt_decode(localStorage.getItem("@fipe:token"))
 
 
     useEffect(() => {
@@ -23,6 +23,7 @@ export const Dashboard = () =>{
             const response2 = await api.get("car")
             console.log(response2.data)
             setCars(response2.data)
+            console.log(cars)
         })()
     }, [])
 
@@ -46,6 +47,7 @@ export const Dashboard = () =>{
                 </ProfileAdsList>
             </Container>
             <Footer/>
+            <ModalRegisterCar/>
         </>
     )
 }
