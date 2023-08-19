@@ -1,4 +1,5 @@
 
+import { Footer } from "../../components/Footer"
 import FomrRegister from "../../components/Form/FormRegister"
 import { Header } from "../../components/Header"
 import { StyledContainerRegisterPage } from "./style"
@@ -13,6 +14,7 @@ export const Register = () =>{
         <StyledContainerRegisterPage >
             <FomrRegister/>
         </StyledContainerRegisterPage>
+        <Footer/>
         </>
     )
 }

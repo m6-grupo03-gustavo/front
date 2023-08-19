@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const StyledContainerFormRegister = styled.section`
     position: relative;
     width: 35rem;
-    height: 80vh;
+    height: 70vh;
     overflow-y: auto;
     background: var(--background);
     border-radius: var(--radius1);

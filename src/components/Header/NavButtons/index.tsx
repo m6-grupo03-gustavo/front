@@ -1,11 +1,22 @@
-import { Link } from "react-router-dom"
-import { Container } from "./style"
+import { Link, useLocation } from "react-router-dom"
+import { Container, ContainerHomePage } from "./style"
 
 export const NavButtons = () => {
-    return (
-        <Container>
-            <Link to={"/login"} id="login_button">Fazer login</Link>
-            <Link to={"/register"} id="register_button">Cadastrar</Link>
-        </Container>
-    )
+    const location = useLocation()
+    if(location.pathname == '/'){
+        return (
+            <ContainerHomePage>
+                <Link to={"/login"} id="login_button">Fazer login</Link>
+                <Link to={"/register"} id="register_button">Cadastrar</Link>
+            </ContainerHomePage>
+        )
+
+    }else{
+        return (
+            <Container>
+                <Link to={"/login"} id="login_button">Fazer login</Link>
+                <Link to={"/register"} id="register_button">Cadastrar</Link>
+            </Container>
+        )
+    }
 }
