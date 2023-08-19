@@ -12,9 +12,23 @@ export const NavBar = styled.div`
     height: 10vh;
     width: 100vw;
     padding: 0px 2.3rem 0px 2.3rem;
+
+    #logo {
+        cursor: pointer;
+    }
+
 `
 
 
 export const NavBarHomePage = styled.div`
+
+
+
+    border-bottom: 2px solid var(--grey7);
+
+
+    #logo {
+        cursor: pointer;
+    }
 
 `

@@ -73,7 +73,7 @@ export const Header = () =>{
         return (
             <>
             <NavBar>
-                <img src="/Logo.svg" onClick={() => navigate("/")}/>
+                <img src="/Logo.svg" onClick={() => navigate("/")} id="logo"/>
                 <NavButtonDesktop>
                     <Link to={"/login"} id="login_button">Fazer login</Link>
                     <Link to={"/register"} id="register_button">Cadastrar</Link>
