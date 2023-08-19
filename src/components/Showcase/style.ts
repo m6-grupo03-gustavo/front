@@ -13,5 +13,5 @@ export const StyleShowcase =  styled.ul`
  
         flex-wrap: wrap;
     
-}
+    }
 `

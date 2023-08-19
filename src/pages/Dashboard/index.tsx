@@ -8,6 +8,8 @@ import { ModalRegisterCar } from "../../components/Modals/ModalRegisterCar"
 import { useAuth } from "../../hooks/useAuth"
 
 
+
+
 export const Dashboard = () =>{
     const { setModal } = useAuth()
     const [user, setUser] = useState({})
