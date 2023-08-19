@@ -24,6 +24,13 @@ export const StyledContainerFormLogin = styled.section`
         gap: 1.5rem;
         z-index: 3;
 
+        p{
+            color: var(--alert1);
+            font-weight: 500;
+            text-align: center;
+            font-size: var(--font-size-4);
+        }
+
         a{
             color: var(--brand3);
             text-decoration: none; 

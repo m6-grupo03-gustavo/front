@@ -2,7 +2,7 @@ import { ReactNode, createContext, useEffect, useState } from "react"
 import { api } from "../service/api"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
-import { AccountState, ILoginFormData, IRegisterFormData } from "../components/Form/validator";
+import { AccountState, ILoginFormData, IRegisterCarFormData, IRegisterFormData } from "../components/Form/validator";
 
 
 interface iAuthProviderProps {
@@ -39,7 +39,6 @@ interface IRegisterResponse{
 
 export interface ICar {
     id: number,
-    name: string,
     brand: string,
     model: string,
     year: string,
@@ -77,6 +76,8 @@ interface iAuthContextValues {
     loading: boolean
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
     signIn:  (data: ILoginFormData) => Promise<void>
+    userLogout: () => void
+    carCreate: (data: IRegisterCarFormData) => Promise<void>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -133,6 +134,24 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         }
     }    
 
+    const userLogout = () =>{
+        window.localStorage.removeItem("@fipe:token")
+        toast.success('User Logged Out')
+        navigate('/login')
+    }
+
+    const carCreate = async (data: IRegisterCarFormData) =>{
+        try {
+            const token = localStorage.getItem("@fipe:token")
+            api.defaults.headers.common.Authorization = `Bearer ${token}`
+            await api.post<ICar>("/car", data)
+            toast.success('Anuncio criado com sucesso')
+        } catch (error) {
+            console.error(error)
+            toast.error('Ocorreu um erro')
+        }
+    }    
+
 
     return (
         <AuthContext.Provider value={{ 
@@ -151,7 +170,9 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             userRegister,
             loading,
             setLoading,
-            signIn
+            signIn,
+            userLogout,
+            carCreate
         }}>
             {children}
         </AuthContext.Provider>

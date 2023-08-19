@@ -15,10 +15,10 @@ interface ISelectOutlined extends SelectHTMLAttributes<HTMLSelectElement> {
 export default  function SelectOutlined ({id, register, label, options}: ISelectOutlined){
     return(
         <StyleSelectFieldset >
-            <select required id={id}  >
+            <select required id={id}  {...register} >
                 <option></option>
                 {options.map((option, index) => (
-                    <option key={index} value={option.value} {...register}>{option.label}</option>
+                    <option key={index} value={option.value} >{option.label}</option>
                 ))}
             </select>
             <span>{label}</span>

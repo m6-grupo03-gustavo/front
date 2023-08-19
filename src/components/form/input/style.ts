@@ -7,7 +7,7 @@ export const StyleFieldset =  styled.fieldset`
    
     input{
 
-        width: 90%;
+        width: 88%;
         padding: 1.5rem;
         background: var(--background);
         border-radius: 5px;

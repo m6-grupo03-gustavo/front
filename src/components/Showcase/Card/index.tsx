@@ -21,7 +21,7 @@ export default function CardCar({car}: ICarCardProps){
     return(
         <StyleCardCar>
             <StyleContainerImage>
-                <img src={car.carImages[0].url} alt={car.name}/>
+                <img src={car.carImages[0].url} alt={car.model}/>
             </StyleContainerImage>
 
             <StyleContainerCarInfo>
@@ -30,8 +30,8 @@ export default function CardCar({car}: ICarCardProps){
             </StyleContainerCarInfo>
 
             <StyleContainerUserIfo>
-                <UserInitials userId={car.id} userName={car.name}/>
-                <h6>Nome de Usuario</h6>
+                <UserInitials userId={car.id} userName={car.model}/>
+                <h6>{car.model}</h6>
             </StyleContainerUserIfo>
 
             <StyleContainerDetailCar>

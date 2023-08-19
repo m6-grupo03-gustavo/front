@@ -10,8 +10,8 @@ export const FilterByModel = () =>{
 
 
     cars.map((car) => {
-        if (!allModelsOfVehicles.includes(car.name.toLowerCase())) {
-            allModelsOfVehicles.push(car.name.toLowerCase());
+        if (!allModelsOfVehicles.includes(car.model.toLowerCase())) {
+            allModelsOfVehicles.push(car.model.toLowerCase());
         }
     })
 
@@ -19,9 +19,9 @@ export const FilterByModel = () =>{
         <StyleFilterByModel>
             <h4>Modelo</h4>
             <ul>
-                {allModelsOfVehicles.map((name) =>(
-                    <li onClick={() =>  setCarsFilter(cars.filter(car => car.name.toLowerCase() == name))}>
-                        {name}
+                {allModelsOfVehicles.map((model) =>(
+                    <li onClick={() =>  setCarsFilter(cars.filter(car => car.model.toLowerCase() == model))}>
+                        {model}
                     </li>    
                 ))}
             </ul>

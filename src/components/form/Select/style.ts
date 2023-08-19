@@ -10,7 +10,7 @@ export const StyleSelectFieldset =  styled.fieldset`
    
     select{
 
-        width: 90%;
+        width: 100%;
         padding: 1.5rem;
         background: var(--background);
         border-radius: 5px;
