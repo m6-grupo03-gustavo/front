@@ -78,6 +78,8 @@ interface iAuthContextValues {
     signIn:  (data: ILoginFormData) => Promise<void>
     userLogout: () => void
     carCreate: (data: IRegisterCarFormData) => Promise<void>
+    user: IRegisterResponse
+    setUser: React.Dispatch<React.SetStateAction<{}>>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -92,6 +94,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const [mobileFilterMain, setMobileFilterMain] = useState<boolean>(false)
     const [page, setPage] = useState<number>(1)
     const [responseGetCars, setResponseGetCars] = useState<IResponseGetCars | null>(null)
+    const [user, setUser] = useState({})
+
 
     useEffect(() => {
         const token = localStorage.getItem("@fipe:token")
@@ -172,7 +176,9 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             setLoading,
             signIn,
             userLogout,
-            carCreate
+            carCreate,
+            user,
+            setUser
         }}>
             {children}
         </AuthContext.Provider>
