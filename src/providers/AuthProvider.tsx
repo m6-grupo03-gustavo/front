@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useEffect, useState } from "react"
+import { ReactNode, SetStateAction, createContext, useEffect, useState } from "react"
 import { api } from "../service/api"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,24 @@ interface IRegisterResponse{
     name: string,
     email: string,
     password: string,
+    phone: string,
+    cpf: string,
+    birthdate: string,
+    description: string,
+    zipcode: string,
+    state: string,
+    city: string,
+    street: string,
+    number: string,
+    complement: string,
+    register_date: Date,
+    account_state: AccountState
+}
+
+interface IUserResponse{
+    id: number,
+    name: string,
+    email: string,
     phone: string,
     cpf: string,
     birthdate: string,
@@ -78,8 +96,8 @@ interface iAuthContextValues {
     signIn:  (data: ILoginFormData) => Promise<void>
     userLogout: () => void
     carCreate: (data: IRegisterCarFormData) => Promise<void>
-    user: IRegisterResponse
-    setUser: React.Dispatch<React.SetStateAction<{}>>
+    user: IUserResponse | null
+    setUser:  React.Dispatch<SetStateAction<IUserResponse | null>>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -94,7 +112,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const [mobileFilterMain, setMobileFilterMain] = useState<boolean>(false)
     const [page, setPage] = useState<number>(1)
     const [responseGetCars, setResponseGetCars] = useState<IResponseGetCars | null>(null)
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState<IUserResponse | null>(null)
 
 
     useEffect(() => {

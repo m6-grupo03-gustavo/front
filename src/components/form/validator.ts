@@ -58,7 +58,7 @@ export  interface IImageRequest{
     url: string
 }
 
-// Meu input só captura string
+//  input só captura string
 // export type IRegisterCarFormData = z.infer<typeof schemaRegisterCar>
 export type IRegisterCarFormData = {
         brand: string,
