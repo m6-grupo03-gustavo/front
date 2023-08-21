@@ -92,10 +92,8 @@ export const ProfileInfo = styled.div`
 `
 
 export const ProfileAdsList = styled.ul`
-    height: 30vh;
-    width: 85vw;
-
-    background-color: green;
+    height: 100%;
+    width: 100%;
 `
 
 export const Card = styled.ul`

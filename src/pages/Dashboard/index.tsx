@@ -6,15 +6,17 @@ import { api } from "../../service/api"
 import jwt_decode from "jwt-decode"
 import { ModalRegisterCar } from "../../components/Modals/ModalRegisterCar"
 import { useAuth } from "../../hooks/useAuth"
-import CardCar from "../../components/Showcase/Card"
 import { ICar } from "../../providers/AuthProvider"
+import ShowcaseCars from "../../components/Showcase"
+import { UserInitials } from "../../components/UserInitials"
 
 
 
 
 export const Dashboard = () =>{
     const { setModal, user, setUser } = useAuth()
-    const [cars, setCars] = useState([])
+
+    const [cars, setCars] = useState<ICar[]>([])
 
     useEffect(() => {
         (async () => {
@@ -27,7 +29,7 @@ export const Dashboard = () =>{
                     const response = await api.get(`user/${userId}`);
                     setUser(response.data);
 
-                    const responseCarsByUser : ICar[] = await api.get(`car/user`)
+                    const responseCarsByUser = await api.get(`car/user`)
                     setCars(responseCarsByUser.data.data)
                     console.log(cars)
                 }else{
@@ -39,29 +41,35 @@ export const Dashboard = () =>{
             }
         })()
     }, [])
+    if(user != null){
 
-    return(
+        return(
+            <>
+                <Header/>
+                <Container>
+                    <div id="theme_color"></div>
+                    <ProfileInfo>
+                        <UserInitials userId={user.id} userName={user.name}/>
+                        <div id="profile_name">
+                            <h1>{user.name}</h1>
+                            <span>{user.account_state == "buyer" ? "Comprador" : "Anunciante"}</span>
+                        </div>
+                        <p>{user.description}</p>
+                        <button onClick={() => setModal('registerCar')}>Criar anuncio</button>
+                    </ProfileInfo>
+                    <ProfileAdsList>
+                        <ShowcaseCars renderOnAnotherPage="dashboard" listCar={cars}/>
+                    </ProfileAdsList>
+                </Container>
+                <Footer/>
+                <ModalRegisterCar/>
+            </>
+        )
+    }else{
         <>
-            <Header/>
-            <Container>
-                <div id="theme_color"></div>
-                <ProfileInfo>
-                    <div id="profile_image"></div>
-                    <div id="profile_name">
-                        <h1>{user.name}</h1>
-                        <span>{user.account_state == "buyer" ? "Comprador" : "Anunciante"}</span>
-                    </div>
-                    <p>{user.description}</p>
-                    <button onClick={() => setModal('registerCar')}>Criar anuncio</button>
-                </ProfileInfo>
-                <ProfileAdsList>
-                    {cars.map((car) =>(
-                        <CardCar key={car.id} car={car}></CardCar> 
-                    ))}
-                </ProfileAdsList>
-            </Container>
-            <Footer/>
-            <ModalRegisterCar/>
+        <Header/>
+        <Footer/>
         </>
-    )
+    }
+
 }
