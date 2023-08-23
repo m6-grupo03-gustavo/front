@@ -16,7 +16,7 @@ export const FormEmailResetPassword = () => {
 
     const submit = (data: IRestEmailFormData) =>{
         resetEmail(data)
-        // reset()
+        reset()
     }
 
     return(
