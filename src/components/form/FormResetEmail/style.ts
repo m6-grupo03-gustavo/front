@@ -10,6 +10,8 @@ export const StyledContainerFormRestEmail = styled.section`
   border-radius: var(--radius1);
   border: 1px solid var(--brand1);
   transform-origin: center center;
+  display: flex;
+  justify-content: center;
 
   form {
     position: absolute;
@@ -21,6 +23,7 @@ export const StyledContainerFormRestEmail = styled.section`
     flex-direction: column;
     gap: 3rem;
     z-index: 3;
+    justify-content: center;
 
     p {
       color: var(--alert1);
