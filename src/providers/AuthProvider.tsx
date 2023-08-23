@@ -2,7 +2,7 @@ import { ReactNode, SetStateAction, createContext, useEffect, useState } from "r
 import { api } from "../service/api"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
-import { AccountState, ILoginFormData, IRegisterCarFormData, IRegisterFormData } from "../components/Form/validator";
+import { AccountState, ILoginFormData, IRegisterCarFormData, IRegisterFormData, IRestEmailFormData } from "../components/Form/validator";
 
 
 interface iAuthProviderProps {
@@ -106,6 +106,7 @@ interface iAuthContextValues {
     setModalRegisterSucess: React.Dispatch<SetStateAction<boolean>>
     modalRegisterAdSucess: boolean
     setModalRegisterAdSucess: React.Dispatch<SetStateAction<boolean>>
+    resetEmail: (data: IRestEmailFormData) => Promise<void>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -199,6 +200,19 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         }
     }
 
+    const resetEmail = async (data: IRestEmailFormData) => {
+        try{
+            const response = await api.post("/user/resetUserPassword", data)
+            console.log(response.data.message)
+            if(response.data.message){
+                toast.success(response.data.message)
+            }
+        }catch (error) {
+            console.log(error)
+            toast.error("Ocorreu um erro")
+        }
+    }
+
     return (
         <AuthContext.Provider value={{ 
             modal,
@@ -227,7 +241,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             modalRegisterAdSucess,
             setModalRegisterAdSucess,
             dashboardCars,
-            setDashboardCars
+            setDashboardCars,
+            resetEmail
         }}>
             {children}
         </AuthContext.Provider>

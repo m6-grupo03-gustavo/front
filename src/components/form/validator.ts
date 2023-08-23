@@ -46,8 +46,6 @@ export const schemaRegisterCar = z.object({
     carImages: z.string()
 })
 
-
-
 export type ILoginFormData = z.infer<typeof schemaLogin>
 
 export type IRegisterFormData = z.infer<typeof schemaRegister>
@@ -71,6 +69,11 @@ export type IRegisterCarFormData = {
         is_published: boolean,
         description: string
         carImages: IImageRequest[]
-}
+    }
+    
+    
+    export const SchemaRestEmail = z.object({
+        email: z.string()
+    })
 
-
+    export type IRestEmailFormData = z.infer<typeof SchemaRestEmail>
