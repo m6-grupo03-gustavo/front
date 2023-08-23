@@ -9,12 +9,13 @@ import { useAuth } from "../../hooks/useAuth"
 import ShowcaseCars from "../../components/Showcase"
 import { UserInitials } from "../../components/UserInitials"
 import { ModalAdCreatedSucessfully } from "../../components/Modals/ModalAdCreatedSucessfully"
+import { ModalUpdateAdress } from "../../components/Modals/ModalUpdateAddress"
 
 
 
 
 export const Dashboard = () =>{
-    const { setModal, user, setUser, dashboardCars, setDashboardCars } = useAuth()
+    const { setModal, user, setUser, dashboardCars, setDashboardCars, setModalUpdateAdress } = useAuth()
 
     
 
@@ -51,6 +52,7 @@ export const Dashboard = () =>{
             }
         })()
     }, [dashboardCars])
+    
 
     if(user != null){
 
@@ -67,6 +69,7 @@ export const Dashboard = () =>{
                         </div>
                         <p>{user.description}</p>
                         <button onClick={() => setModal('registerCar')}>Criar anuncio</button>
+                        <button onClick={() => setModalUpdateAdress(true)}>Edita endereço</button>
                     </ProfileInfo>
                     <ProfileAdsList>
                         <ShowcaseCars renderOnAnotherPage="dashboard" listCar={dashboardCars}/>
@@ -75,6 +78,7 @@ export const Dashboard = () =>{
                 <Footer/>
                 <ModalRegisterCar/>
                 <ModalAdCreatedSucessfully/>
+                <ModalUpdateAdress/>
             </>
         )
     }else{

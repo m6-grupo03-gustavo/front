@@ -51,6 +51,12 @@ export type ILoginFormData = z.infer<typeof schemaLogin>
 export type IRegisterFormData = z.infer<typeof schemaRegister>
 
 
+const schemaRegisterWithoutPassword = schemaRegister.omit({ password: true });
+
+
+export type IRegisterUserResponseFormData = z.infer<typeof schemaRegisterWithoutPassword>;
+
+
 
 export  interface IImageRequest{
     url: string
@@ -72,8 +78,23 @@ export type IRegisterCarFormData = {
     }
     
     
-    export const SchemaRestEmail = z.object({
-        email: z.string()
-    })
+export const SchemaRestEmail = z.object({
+    email: z.string()
+})
 
-    export type IRestEmailFormData = z.infer<typeof SchemaRestEmail>
+export const schemaUpdateAdress = z.object({
+        zipcode: z.string().optional(),
+        state: z.string().optional(),
+        city: z.string().optional(),
+        street: z.string().optional(),
+        number: z.string().optional(),
+        complement: z.string().optional(),
+})
+
+export type IUpdateAdressFormData = z.infer<typeof schemaUpdateAdress>
+
+export type IRestEmailFormData = z.infer<typeof SchemaRestEmail>
+
+
+  
+
