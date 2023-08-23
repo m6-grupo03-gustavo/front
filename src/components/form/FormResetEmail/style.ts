@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledContainerFormLogin = styled.section`
+export const StyledContainerFormRestEmail = styled.section`
   position: relative;
   width: 35rem;
   /* height: 42rem; */
@@ -15,11 +15,11 @@ export const StyledContainerFormLogin = styled.section`
     position: absolute;
     inset: 0.4rem;
     background: var(--background);
-    padding: 2rem 4rem;
+    padding: 2rem 4rem 2rem 4rem;
     border-radius: 0.8rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 3rem;
     z-index: 3;
 
     p {
@@ -43,29 +43,18 @@ export const StyledContainerFormLogin = styled.section`
       color: var(--brand1);
       font-weight: 500;
       text-align: center;
-      letter-spacing: 0.3rem;
-      font-size: var(--font-size-1);
-      span {
-        color: var(--brand3);
-        font-size: var(--font-size-2);
-      }
-    }
-
-    .newAccount_link {
       letter-spacing: 0.2rem;
-      margin-top: 20px;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem 3rem;
-      font-size: var(--font-size-4);
-      border-radius: var(--radius3);
-      background-color: var(--brand1);
-      color: var(--grey9);
-      max-width: 260px;
-      width: 100%;
+      font-size: var(--font-size-1-2);
+    }
+    span {
+      color: var(--brand3);
+      font-size: var(--font-size-5);
+    }
+    .text_span{
+        margin-bottom: 25px;
+    }
+    button{
+        margin-top: -10px;
     }
   }
 `;

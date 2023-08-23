@@ -92,6 +92,7 @@ table {
     --radius3: 0.4rem;
     --font-size-0: 3.8rem;
     --font-size-1: 2.8rem;
+    --font-size-1-2: 2.6rem;
     --font-size-2: 2rem;
     --font-size-3: 1.85rem;
     --font-size-4: 1.6rem;

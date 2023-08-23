@@ -13,8 +13,10 @@ import {
     ILoginFormData, 
     IRegisterCarFormData, 
     IRegisterFormData, 
+    IRestEmailFormData, 
     IUpdateAdressFormData 
 } from "../components/Form/validator";
+
 
 
 interface iAuthProviderProps {
@@ -65,6 +67,7 @@ interface IUserResponse{
     complement: string,
     register_date: Date,
     account_state: AccountState
+    reset_token: string
 }
 
 export interface ICar {
@@ -128,6 +131,7 @@ interface iAuthContextValues {
         complement?: string | undefined;
         request?: IUserResponse;
     } | undefined>
+    resetEmail: (data: IRestEmailFormData) => Promise<void>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -222,6 +226,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         }
     }
 
+
     const adressUpdate= async (data: IUpdateAdressFormData, id: number) =>{
         try {
             const token = localStorage.getItem("@fipe:token")
@@ -234,6 +239,19 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         } catch (error) {
             toast.error('Unable to update')
             console.error(error)
+        }
+    }
+
+    const resetEmail = async (data: IRestEmailFormData) => {
+        try{
+            const response = await api.post("/user/resetUserPassword", data)
+            console.log(response.data.message)
+            if(response.data.message){
+                toast.success(response.data.message)
+            }
+        }catch (error) {
+            console.log(error)
+            toast.error("Ocorreu um erro")
         }
     }
 
@@ -268,7 +286,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             setDashboardCars,
             modalUpdateAdress,
             setModalUpdateAdress,
-            adressUpdate
+            adressUpdate,
+            resetEmail
         }}>
             {children}
         </AuthContext.Provider>
