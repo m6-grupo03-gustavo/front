@@ -245,10 +245,14 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const resetEmail = async (data: IRestEmailFormData) => {
         try{
             const response = await api.post("/user/resetUserPassword", data)
-            console.log(response.data.message)
+            
             if(response.data.message){
+                const getUser = await api.get("/user")
+                const toSetUser = getUser.data.find((user: IUserResponse)=> user.email === data.email)
+                setUser(toSetUser)
                 toast.success(response.data.message)
             }
+
         }catch (error) {
             console.log(error)
             toast.error("Ocorreu um erro")

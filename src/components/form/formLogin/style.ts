@@ -19,6 +19,7 @@ export const StyledContainerFormLogin = styled.section`
     border-radius: 0.8rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 1.5rem;
     z-index: 3;
 
