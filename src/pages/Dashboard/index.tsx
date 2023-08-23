@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
 import { Container, ProfileAdsList, ProfileInfo } from "./style"
@@ -6,17 +6,17 @@ import { api } from "../../service/api"
 import jwt_decode from "jwt-decode"
 import { ModalRegisterCar } from "../../components/Modals/ModalRegisterCar"
 import { useAuth } from "../../hooks/useAuth"
-import { ICar } from "../../providers/AuthProvider"
 import ShowcaseCars from "../../components/Showcase"
 import { UserInitials } from "../../components/UserInitials"
+import { ModalAdCreatedSucessfully } from "../../components/Modals/ModalAdCreatedSucessfully"
 
 
 
 
 export const Dashboard = () =>{
-    const { setModal, user, setUser } = useAuth()
+    const { setModal, user, setUser, dashboardCars, setDashboardCars } = useAuth()
 
-    const [cars, setCars] = useState<ICar[]>([])
+    
 
     useEffect(() => {
         (async () => {
@@ -28,10 +28,6 @@ export const Dashboard = () =>{
                     const userId = decodedToken.sub;
                     const response = await api.get(`user/${userId}`);
                     setUser(response.data);
-
-                    const responseCarsByUser = await api.get(`car/user`)
-                    setCars(responseCarsByUser.data.data)
-                    console.log(cars)
                 }else{
                     await api.get(`user/${null}`)
                     //Garante nosso axios interceptor no caso de não obter token
@@ -41,6 +37,21 @@ export const Dashboard = () =>{
             }
         })()
     }, [])
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const token = localStorage.getItem("@fipe:token");
+                
+                    api.defaults.headers.common.Authorization = `Bearer ${token}`
+                    const responseCarsByUser = await api.get(`car/user`)
+                    setDashboardCars(responseCarsByUser.data.data)
+            } catch (error) {
+                console.error(error)
+            }
+        })()
+    }, [dashboardCars])
+
     if(user != null){
 
         return(
@@ -58,11 +69,12 @@ export const Dashboard = () =>{
                         <button onClick={() => setModal('registerCar')}>Criar anuncio</button>
                     </ProfileInfo>
                     <ProfileAdsList>
-                        <ShowcaseCars renderOnAnotherPage="dashboard" listCar={cars}/>
+                        <ShowcaseCars renderOnAnotherPage="dashboard" listCar={dashboardCars}/>
                     </ProfileAdsList>
                 </Container>
                 <Footer/>
                 <ModalRegisterCar/>
+                <ModalAdCreatedSucessfully/>
             </>
         )
     }else{
