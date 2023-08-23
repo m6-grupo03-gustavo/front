@@ -7,8 +7,6 @@ import { BtnSubmit } from '../../Buttons/btnSubmit';
 import { useAuth } from '../../../hooks/useAuth';
 
 
-
-
 export default function FomrLogin (){
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<ILoginFormData>({
@@ -30,8 +28,9 @@ export default function FomrLogin (){
                 {errors.email && <p>{errors.email.message}</p>}
                 <InputOutlined id="password" type="password" label='Password'  register={register('password')}/>
                 {errors.password && <p>{errors.password.message}</p>}
-                <a href='/register'>Create new account</a>
                 <BtnSubmit text='Login' typeStyle='brand1'/>
+                <a href="/login/resetPassword">Forget you password?</a>
+                <a className='newAccount_link' href='/register'>Create new account</a>
             </form>
         </StyledContainerFormLogin>
     ) 

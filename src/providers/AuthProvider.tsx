@@ -53,6 +53,7 @@ interface IUserResponse{
     complement: string,
     register_date: Date,
     account_state: AccountState
+    reset_token: string
 }
 
 export interface ICar {

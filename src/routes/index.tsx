@@ -4,6 +4,7 @@ import { Login } from "../pages/Login"
 import { Register } from "../pages/Register"
 import { Dashboard } from "../pages/Dashboard"
 import { ProtectedRoutes } from "./ProtectedRoutes"
+import { ResetPassword } from "../pages/ResetPassword/indext"
 
 
 
@@ -13,6 +14,7 @@ export const RoutesMain = () => {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/login/resetPassword" element={<ResetPassword />} />
             <Route path="/register" element={<Register />} />
             <Route element={<ProtectedRoutes/>}>
                 <Route path="/dashboard" element={<Dashboard />} />
