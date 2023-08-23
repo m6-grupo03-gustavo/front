@@ -81,7 +81,9 @@ interface iAuthContextValues {
     modal: string
     setModal: React.Dispatch<React.SetStateAction<string>>
     cars: ICar[]
+    dashboardCars: ICar[]
     setCars: React.Dispatch<React.SetStateAction<ICar[]>>
+    setDashboardCars: React.Dispatch<React.SetStateAction<ICar[]>>
     mobileFilterMain: boolean
     setMobileFilterMain: React.Dispatch<React.SetStateAction<boolean>>
     carsFilter: ICar[]
@@ -98,6 +100,11 @@ interface iAuthContextValues {
     carCreate: (data: IRegisterCarFormData) => Promise<void>
     user: IUserResponse | null
     setUser:  React.Dispatch<SetStateAction<IUserResponse | null>>
+    carRemove: (id: number) => Promise<void>
+    modalRegisterSucess: boolean
+    setModalRegisterSucess: React.Dispatch<SetStateAction<boolean>>
+    modalRegisterAdSucess: boolean
+    setModalRegisterAdSucess: React.Dispatch<SetStateAction<boolean>>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -108,11 +115,14 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const [loading, setLoading] = useState(true)
     const [modal, setModal] = useState<string>('off')
     const [cars, setCars] = useState<ICar[]>([])
+    const [dashboardCars, setDashboardCars] = useState<ICar[]>([])
     const [carsFilter, setCarsFilter] = useState<ICar[]>([])
     const [mobileFilterMain, setMobileFilterMain] = useState<boolean>(false)
     const [page, setPage] = useState<number>(1)
     const [responseGetCars, setResponseGetCars] = useState<IResponseGetCars | null>(null)
     const [user, setUser] = useState<IUserResponse | null>(null)
+    const [modalRegisterSucess, setModalRegisterSucess] = useState(false)
+    const [modalRegisterAdSucess, setModalRegisterAdSucess] = useState(false)
 
 
     useEffect(() => {
@@ -149,7 +159,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         try{
             await api.post<IRegisterResponse>('/user', data)
             toast.success('User created successfully')
-            navigate('login')
+            setModalRegisterSucess(true)
         }catch (error){
             toast.error('Email already exists')
             console.error(error)
@@ -168,12 +178,25 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             api.defaults.headers.common.Authorization = `Bearer ${token}`
             await api.post<ICar>("/car", data)
             toast.success('Anuncio criado com sucesso')
+            setModal('off')
+            setModalRegisterAdSucess(true)
         } catch (error) {
             console.error(error)
             toast.error('Ocorreu um erro')
         }
     }    
 
+    const carRemove = async (id: number) =>{
+        try {
+            const token = localStorage.getItem("@fipe:token")
+            api.defaults.headers.common.Authorization = `Bearer ${token}`
+            await api.delete<ICar>(`/car/${id}`)
+            toast.success('Anuncio deletado com sucesso')
+        } catch (error) {
+            console.error(error)
+            toast.error('...')
+        }
+    }
 
     return (
         <AuthContext.Provider value={{ 
@@ -196,7 +219,14 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             userLogout,
             carCreate,
             user,
-            setUser
+            setUser,
+            carRemove,
+            modalRegisterSucess,
+            setModalRegisterSucess,
+            modalRegisterAdSucess,
+            setModalRegisterAdSucess,
+            dashboardCars,
+            setDashboardCars
         }}>
             {children}
         </AuthContext.Provider>

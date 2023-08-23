@@ -32,7 +32,6 @@ export default function FomrRegisterCar (){
 
         // console.log(data, 'DATA CARRRRR')
         carCreate(data)
-        reset()
     }
 
       

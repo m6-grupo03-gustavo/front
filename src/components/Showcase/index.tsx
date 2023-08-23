@@ -11,7 +11,7 @@ interface IShowcaseCarsProps{
 }
 
 export default  function ShowcaseCars({renderOnAnotherPage, listCar} :IShowcaseCarsProps){
-    const {  setCars, setCarsFilter, carsFilter, page, setResponseGetCars } = useAuth()
+    const { setCars, setCarsFilter, carsFilter, page, setResponseGetCars } = useAuth()
 
     useEffect(() => {
         (async () => {
@@ -28,7 +28,7 @@ export default  function ShowcaseCars({renderOnAnotherPage, listCar} :IShowcaseC
             <>
                     <StyleShowcase>
                         {listCar?.map((car) =>(
-                            <CardCar key={car.id} car={car}/>    
+                            <CardCar renderOnAnotherPage={renderOnAnotherPage} key={car.id} car={car}/>    
                         ))}
                     </StyleShowcase>
             </>
@@ -39,7 +39,7 @@ export default  function ShowcaseCars({renderOnAnotherPage, listCar} :IShowcaseC
             <>
                     <StyleShowcase>
                         {carsFilter.map((car) =>(
-                            <CardCar key={car.id} car={car}/>    
+                            <CardCar   key={car.id} car={car}/>    
                         ))}
                     </StyleShowcase>
             </>

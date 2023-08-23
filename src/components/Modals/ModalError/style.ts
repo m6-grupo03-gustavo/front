@@ -29,6 +29,7 @@ export const StyleModalError = styled.div`
         h3{
             letter-spacing: 3px;
             font-size: var(--font-size-3);
+            color: var(--grey9);
         }
 
         button{

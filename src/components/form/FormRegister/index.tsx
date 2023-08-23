@@ -12,22 +12,19 @@ import SelectOutlined from '../Select';
 
 export default function FomrRegister (){
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<IRegisterFormData>({
+    const { register, handleSubmit, formState: { errors } } = useForm<IRegisterFormData>({
         resolver: zodResolver(schemaRegister)
     })
 
     const { userRegister } = useAuth()  
     
     const submit: SubmitHandler<IRegisterFormData> = (data) =>{
-        console.log(data)
-
         userRegister(data)
-        reset()
     }
 
     const options = [
         { value: 'buyer', label: 'Comprador' },
-        { value: 'seller', label: 'Vendedor' },
+        { value: 'seller', label: 'Anunciante' },
       ];
 
     return(
