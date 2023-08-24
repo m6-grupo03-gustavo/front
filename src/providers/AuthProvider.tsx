@@ -15,7 +15,9 @@ import {
     IRegisterFormData, 
     IRestEmailFormData, 
     IUpdateAdressFormData, 
-    IUpdateUserInfo
+    IUpdateUserInfo,
+    IUpdatePassword,
+    IUpdatePasswordProvider
 } from "../components/Form/validator";
 
 
@@ -133,6 +135,7 @@ interface iAuthContextValues {
         request?: IUserResponse;
     } | undefined>
     resetEmail: (data: IRestEmailFormData) => Promise<void>
+    updatePassword: (data: IUpdatePassword) => Promise<void>
     modalUpdateUserInfo: boolean
     setModalUpdateUserInfo: React.Dispatch<SetStateAction<boolean>>
     userInfoUpdate: (data: IUpdateUserInfo, id: number) => Promise<{
@@ -275,9 +278,27 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         try{
             const response = await api.post("/user/resetUserPassword", data)
             if(response.data.message){
+                const getUser = await api.get("/user")
+                const toSetUser = getUser.data.find((user: IUserResponse)=> user.email === data.email)
+                localStorage.setItem("@reset:token", toSetUser.reset_token)
+                setUser(toSetUser)
                 toast.success(response.data.message)
             }
         }catch (error) {
+            console.log(error)
+            toast.error("Ocorreu um erro")
+        }
+    }
+
+    const updatePassword = async (data: IUpdatePasswordProvider) =>{
+        const restToken = localStorage.getItem("@reset:token")
+        console.log(restToken, data)
+        try{
+            const response = await api.patch(`/user/resetUserPassword/${restToken}`, data)
+            console.log(response)
+            localStorage.removeItem("@reset:token")
+            toast.success(response.data.message)
+        }catch(error){
             console.log(error)
             toast.error("Ocorreu um erro")
         }
@@ -318,7 +339,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             resetEmail,
             modalUpdateUserInfo,
             setModalUpdateUserInfo,
-            userInfoUpdate
+            userInfoUpdate,
+            updatePassword
         }}>
             {children}
         </AuthContext.Provider>

@@ -20,6 +20,7 @@ export const StyledContainerFormLogin = styled.section`
     border-radius: 0.8rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 1.5rem;
     z-index: 3;
 
@@ -67,6 +68,10 @@ export const StyledContainerFormLogin = styled.section`
       color: var(--grey9);
       max-width: 260px;
       width: 100%;
+    }
+    .newAccount_link:hover {
+      background-color: var(--brand3);
+      color: var(--grey0);
     }
   }
 `;
