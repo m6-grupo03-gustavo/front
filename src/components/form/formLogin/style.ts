@@ -68,5 +68,9 @@ export const StyledContainerFormLogin = styled.section`
       max-width: 260px;
       width: 100%;
     }
+    .newAccount_link:hover {
+      background-color: var(--brand3);
+      color: var(--grey0);
+    }
   }
 `;
