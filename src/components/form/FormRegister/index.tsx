@@ -19,6 +19,7 @@ export default function FomrRegister (){
     const { userRegister } = useAuth()  
     
     const submit: SubmitHandler<IRegisterFormData> = (data) =>{
+        console.log(data)
         userRegister(data)
     }
 

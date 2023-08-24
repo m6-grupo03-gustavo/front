@@ -6,7 +6,6 @@ export const StyleFieldset =  styled.fieldset`
     padding: 1rem;
    
     input{
-        margin-left: -11px;
         width: 88%;
         padding: 1.5rem;
         background: var(--background);
@@ -18,7 +17,6 @@ export const StyleFieldset =  styled.fieldset`
     }
 
     span{
-        margin-left: -11px;
         position: absolute;
         left: 0;
         top: 1.2rem;
@@ -31,7 +29,6 @@ export const StyleFieldset =  styled.fieldset`
 
     input:valid ~ span,
     input:focus ~ span{
-        margin-left: -11px;
         color: var(--brand1);
         transform: translateX(2rem) translateY(-0.5rem);
         font-size: var(--font-size-6);

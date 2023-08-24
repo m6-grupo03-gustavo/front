@@ -16,6 +16,7 @@ export default function FomrLogin (){
     const { signIn } = useAuth()
     
     const submit: SubmitHandler<ILoginFormData> = (data) =>{
+        console.log(data, 'DATAAAA')
         signIn(data)
         reset()
     }

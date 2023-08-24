@@ -91,6 +91,18 @@ export const schemaUpdateAdress = z.object({
         complement: z.string().optional(),
 })
 
+
+export const schemaUpdateUserInfo = z.object({
+    name: z.string().optional(),
+    email: z.string().email("e-mail invalido").optional(),
+    phone: z.string().optional(),
+    cpf: z.string().optional(),
+    birthdate: z.string().optional(),
+    description: z.string().optional(),
+})
+
+export type IUpdateUserInfo = z.infer<typeof schemaUpdateUserInfo>
+
 export type IUpdateAdressFormData = z.infer<typeof schemaUpdateAdress>
 
 export type IRestEmailFormData = z.infer<typeof SchemaRestEmail>

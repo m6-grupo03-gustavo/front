@@ -14,7 +14,8 @@ import {
     IRegisterCarFormData, 
     IRegisterFormData, 
     IRestEmailFormData, 
-    IUpdateAdressFormData 
+    IUpdateAdressFormData, 
+    IUpdateUserInfo
 } from "../components/Form/validator";
 
 
@@ -132,6 +133,17 @@ interface iAuthContextValues {
         request?: IUserResponse;
     } | undefined>
     resetEmail: (data: IRestEmailFormData) => Promise<void>
+    modalUpdateUserInfo: boolean
+    setModalUpdateUserInfo: React.Dispatch<SetStateAction<boolean>>
+    userInfoUpdate: (data: IUpdateUserInfo, id: number) => Promise<{
+        name?: string | undefined;
+        email?: string | undefined;
+        phone?: string | undefined;
+        cpf?: string | undefined;
+        birthdate?: string | undefined;
+        description?: string | undefined;
+        request?: IUserResponse;
+    } | undefined>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -151,6 +163,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const [modalRegisterSucess, setModalRegisterSucess] = useState(false)
     const [modalRegisterAdSucess, setModalRegisterAdSucess] = useState(false)
     const [modalUpdateAdress, setModalUpdateAdress] = useState(false)
+    const [modalUpdateUserInfo, setModalUpdateUserInfo] = useState(false)
 
 
     useEffect(() => {
@@ -171,7 +184,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         try {
             const response = await api.post<ILoginResponse>("/login", data)
             const { token } = response.data
-            api.defaults.headers.common.Authorization = `Bearer ${token}`
+            // api.defaults.headers.common.Authorization = `Bearer ${token}`
             localStorage.setItem("@fipe:token", token)
             setLoading(false)
             toast.success('User logged in successfully')
@@ -190,6 +203,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             setModalRegisterSucess(true)
         }catch (error){
             toast.error('Email already exists')
+            console.log(error)
             console.error(error)
         }
     }    
@@ -242,10 +256,24 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         }
     }
 
+    const userInfoUpdate= async (data: IUpdateUserInfo, id: number) =>{
+        try {
+            const token = localStorage.getItem("@fipe:token")
+            api.defaults.headers.common.Authorization = `Bearer ${token}`
+            const response = await api.patch(`/user/${id}`, data)
+            toast.success('Adress updated successfully')
+            setModalUpdateUserInfo(false)
+            location.reload()
+            return {...response, ...data}
+        } catch (error) {
+            toast.error('Unable to update')
+            console.error(error)
+        }
+    }
+
     const resetEmail = async (data: IRestEmailFormData) => {
         try{
             const response = await api.post("/user/resetUserPassword", data)
-            console.log(response.data.message)
             if(response.data.message){
                 toast.success(response.data.message)
             }
@@ -287,7 +315,10 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             modalUpdateAdress,
             setModalUpdateAdress,
             adressUpdate,
-            resetEmail
+            resetEmail,
+            modalUpdateUserInfo,
+            setModalUpdateUserInfo,
+            userInfoUpdate
         }}>
             {children}
         </AuthContext.Provider>

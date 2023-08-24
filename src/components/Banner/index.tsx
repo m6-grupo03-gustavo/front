@@ -9,6 +9,7 @@ import 'swiper/css/scrollbar';
 import car1 from '../../../public/car1.jpg'
 import car2 from '../../../public/car2.jpg'
 import car3 from '../../../public/car3.jpg'
+import { Advertising } from "./Advertising";
 
 
 export const Banner = () =>{
@@ -24,24 +25,23 @@ export const Banner = () =>{
             <SwiperSlide>
                 <StyleBanner>
                     <img src={car1} alt="car banner" />
-                    <div>
-                        {/* <h1>Motors Shop</h1>
-                        <h3>A melhor plataforma de anúncios de carros do país</h3> */}
-                    </div>
+                    <div className="containerFilter"></div>
                 </StyleBanner>
             </SwiperSlide>
 
             <SwiperSlide>
                 <StyleBanner>
                     <img src={car2} alt="car banner" />
-                    <div></div>
+                    <div className="containerFilter">
+                        <Advertising message="A melhor plataforma de anúncios de carros"/>
+                    </div>
                 </StyleBanner>
             </SwiperSlide>
 
             <SwiperSlide>
                 <StyleBanner>
                     <img src={car3} alt="car banner" />
-                    <div></div>
+                    <div className="containerFilter"></div>
                 </StyleBanner>
             </SwiperSlide>
 
