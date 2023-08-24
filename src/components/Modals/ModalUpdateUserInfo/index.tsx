@@ -9,7 +9,8 @@ export const ModalUpdateUserInfo = () => {
 
 
     useEffect(() => {
-        const handleOutclick = (e: MouseEvent) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const handleOutclick = (e: any) => {
             if(!modalRef.current?.contains(e.target)){
                 setModalUpdateUserInfo(false)
             }

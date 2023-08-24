@@ -23,7 +23,8 @@ export const Dashboard = () =>{
                 const token = localStorage.getItem("@fipe:token");
                 if(token){
                     api.defaults.headers.common.Authorization = `Bearer ${token}`
-                    const decodedToken : unknown = jwt_decode(token);
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    const decodedToken : any = jwt_decode(token);
                     const userId = decodedToken.sub;
                     const response = await api.get(`user/${userId}`);
                     setUser(response.data);

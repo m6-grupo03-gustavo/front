@@ -10,7 +10,8 @@ export const ModalRegisterCar = () => {
     const modalRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        const handleOutclick = (e: MouseEvent) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const handleOutclick = (e: any) => {
             if(!modalRef.current?.contains(e.target)){
                 setModal('off')
             }
