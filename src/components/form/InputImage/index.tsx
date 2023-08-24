@@ -8,7 +8,8 @@ interface IInputImage{
 
 export default  function InputImage ({ register } : IInputImage){
     
-    function handleAvatar(event) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    function handleAvatar(event: any) {
         event.target.files[0]
     }
 

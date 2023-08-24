@@ -15,7 +15,8 @@ export const ModalRemoveAd = ({id, setModalRemoveAdOpen , modalRemoveAdOpen}: IM
     const modalRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        const handleOutclick = (e: MouseEvent) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const handleOutclick = (e: any) => {
             if(!modalRef.current?.contains(e.target)){
                 setModalRemoveAdOpen(false)
             }
