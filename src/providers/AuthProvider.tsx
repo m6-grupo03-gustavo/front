@@ -14,7 +14,9 @@ import {
     IRegisterCarFormData, 
     IRegisterFormData, 
     IRestEmailFormData, 
-    IUpdateAdressFormData 
+    IUpdateAdressFormData, 
+    IUpdatePassword,
+    IUpdatePasswordProvider
 } from "../components/Form/validator";
 
 
@@ -132,6 +134,7 @@ interface iAuthContextValues {
         request?: IUserResponse;
     } | undefined>
     resetEmail: (data: IRestEmailFormData) => Promise<void>
+    updatePassword: (data: IUpdatePassword) => Promise<void>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -249,11 +252,26 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             if(response.data.message){
                 const getUser = await api.get("/user")
                 const toSetUser = getUser.data.find((user: IUserResponse)=> user.email === data.email)
+                localStorage.setItem("@reset:token", toSetUser.reset_token)
                 setUser(toSetUser)
                 toast.success(response.data.message)
             }
 
         }catch (error) {
+            console.log(error)
+            toast.error("Ocorreu um erro")
+        }
+    }
+
+    const updatePassword = async (data: IUpdatePasswordProvider) =>{
+        const restToken = localStorage.getItem("@reset:token")
+        console.log(restToken, data)
+        try{
+            const response = await api.patch(`/user/resetUserPassword/${restToken}`, data)
+            console.log(response)
+            localStorage.removeItem("@reset:token")
+            toast.success(response.data.message)
+        }catch(error){
             console.log(error)
             toast.error("Ocorreu um erro")
         }
@@ -291,7 +309,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             modalUpdateAdress,
             setModalUpdateAdress,
             adressUpdate,
-            resetEmail
+            resetEmail,
+            updatePassword
         }}>
             {children}
         </AuthContext.Provider>
