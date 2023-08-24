@@ -29,7 +29,6 @@ export default function FormUpdateAdress (){
     }, [])
     
     const submit: SubmitHandler<IUpdateAdressFormData> = (data) =>{
-        console.log(data, 'DATA USER ADRESS')
         if(user){
             adressUpdate(data, user.id)
         }

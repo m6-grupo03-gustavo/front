@@ -12,7 +12,7 @@ export const StyleBanner =  styled.div`
         background-size: auto;
     }
     
-    div{
+    .containerFilter{
         position: absolute;
         top: 0px;
         left: 0px;

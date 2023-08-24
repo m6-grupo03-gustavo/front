@@ -11,6 +11,7 @@ export const StyledContainerFormLogin = styled.section`
   border: 1px solid var(--brand1);
   transform-origin: center center;
 
+
   form {
     position: absolute;
     inset: 0.4rem;

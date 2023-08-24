@@ -88,7 +88,7 @@ export type IRegisterCarFormData = {
         complement: z.string().optional(),
     })
     
-    export type IUpdateAdressFormData = z.infer<typeof schemaUpdateAdress>
+ 
     
     export const SchemaRestEmail = z.object({
         email: z.string()
@@ -96,15 +96,31 @@ export type IRegisterCarFormData = {
     
     export type IRestEmailFormData = z.infer<typeof SchemaRestEmail>
 
-    export const SchemaUpdatePassword = z.object({
+
+
+export const schemaUpdateUserInfo = z.object({
+    name: z.string().optional(),
+    email: z.string().email("e-mail invalido").optional(),
+    phone: z.string().optional(),
+    cpf: z.string().optional(),
+    birthdate: z.string().optional(),
+    description: z.string().optional(),
+})
+
+export type IUpdateUserInfo = z.infer<typeof schemaUpdateUserInfo>
+
+export type IUpdateAdressFormData = z.infer<typeof schemaUpdateAdress>
+
+export const SchemaUpdatePassword = z.object({
         password: z.string(),
         confirm_password: z.string()
     }).refine(data => data.password === data.confirm_password, {
         message: "Passwords do not match",
         path: ["confirm_password"]
-    });
+    })
     
     export type IUpdatePassword = z.infer<typeof SchemaUpdatePassword>
+
 
     export const SchemaUpdatePasswordProvider = z.object({
         password: z.string(),

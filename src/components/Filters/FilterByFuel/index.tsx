@@ -17,7 +17,6 @@ export const FilterByFuel = () =>{
             allFuelsOfVehicles.push(car.fuel.toLowerCase());
         }
     })
-    console.log(allFuelsOfVehicles)
     return(
         <StyleFilterByFuel>
             <h4>Combustível</h4>

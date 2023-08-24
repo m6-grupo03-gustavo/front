@@ -5,17 +5,17 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { NavButtonDesktop, NavButtonDesktopHome } from "./NavButtons/style"
 import { FaBars } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai'
-import { BiArrowBack } from 'react-icons/bi'
+import {  BiLogOutCircle } from 'react-icons/bi'
 import { useAuth } from "../../hooks/useAuth"
+import { UserInitials } from "../UserInitials"
 
 
 export const Header = () =>{
-    const { userLogout  } = useAuth()
+    const { userLogout, user  } = useAuth()
     const [isOpenNavButtons, setIsOpenNavButtons] = useState(false)
     const navigate = useNavigate()
     const [width, setWidth] = useState(window.innerWidth);
     const location = useLocation()
-    console.log(location.pathname)
 
     useEffect(() => {
         //  função que atualize o estado com a nova largura da tela
@@ -37,11 +37,8 @@ export const Header = () =>{
           return(
               <>
                   <NavBarHomePage>
-                    
-                    <div className="containerLogo">
+                    <h1>Motors <small>Shop</small></h1>
 
-                      <img src="/Logo.svg" onClick={() => navigate("/")}/>
-                    </div>
                       {
                           !isOpenNavButtons ? <div className="containerToggle"  onClick={() => setIsOpenNavButtons(!isOpenNavButtons)}><FaBars size={25} style={{
                             color:  "#fff",
@@ -65,9 +62,7 @@ export const Header = () =>{
         return(
             <>
                 <NavBarHomePage>
-                    <span>
-                        <img src="/Logo.svg" onClick={() => navigate("/")}/>
-                    </span>
+                    <h1>Motors <small>Shop</small></h1>
                     
                     <NavButtonDesktopHome>
                         <Link to={"/login"} id="login_button">Fazer login</Link>
@@ -83,13 +78,14 @@ export const Header = () =>{
         return(
             <>
                 <NavBarHomePage>
-                    <span>
-                        <img src="/Logo.svg" onClick={() => navigate("/")}/>
-                    </span>
+                    
+                    <img src="/Logo.svg" onClick={() => navigate("/")}/>
+                
                     
                     <section>
                     <div className="containerUserLogout" onClick={() => userLogout()}>
-                        <BiArrowBack size={40} style={{
+                        {user == null ? <></>: <UserInitials userId={user.id} userName={user.name}/>}
+                        <BiLogOutCircle size={40} style={{
                                     color:  "#ADB5BD",
                                     cursor: 'pointer',
                                     margin: "0"

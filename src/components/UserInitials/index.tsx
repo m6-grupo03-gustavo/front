@@ -20,7 +20,7 @@ export const UserInitials = ({userName, userId} :IUserInitialsProps) =>{
 
     return(
         <StyleContainerUserInitials colorByUserId={colorByUserId}>
-            <span>{initials}</span>
+            <span className="initials">{initials}</span>
         </StyleContainerUserInitials>
     )
 }

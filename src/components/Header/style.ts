@@ -30,6 +30,19 @@ export const NavBarHomePage = styled.div`
     align-items: center;
     justify-content: space-between;
 
+    img{
+        margin-left: 2rem;
+    }
+
+    h1 {
+        font-size: var(--font-size-0);
+        color: var(--grey9);
+        margin-left: 2rem;
+        small{
+            color: var(--brand3);
+        }
+    }
+
     #nav-icon:hover {
         fill: red;
     }
@@ -56,6 +69,9 @@ export const NavBarHomePage = styled.div`
 
     .containerUserLogout{
         margin-right: 20px;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
     }
 
 

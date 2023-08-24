@@ -13,7 +13,7 @@ import SelectOutlined from '../Select';
 
 export default function FomrRegisterCar (){
 
-    const { register, handleSubmit, reset,  formState: { errors } } = useForm<IRegisterCarFormData>({
+    const { register, handleSubmit,  formState: { errors } } = useForm<IRegisterCarFormData>({
         resolver: zodResolver(schemaRegisterCar)
     })
 
@@ -29,8 +29,6 @@ export default function FomrRegisterCar (){
         }
 
         data.carImages = [newImageData]
-
-        // console.log(data, 'DATA CARRRRR')
         carCreate(data)
     }
 
