@@ -265,9 +265,12 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
 
     const updatePassword = async (data: IUpdatePasswordProvider) =>{
         const restToken = localStorage.getItem("@reset:token")
-        console.log(restToken, data)
+        const getUser = await api.get("/user")
+        const toSetUser = getUser.data.find((user: IUserResponse)=> user.reset_token === restToken)
+        
+        console.log(restToken, data, toSetUser)
         try{
-            const response = await api.patch(`/user/resetUserPassword/${restToken}`, data)
+            const response = await api.patch(`/user/resetUserPassword/${restToken}`, data.password)
             console.log(response)
             localStorage.removeItem("@reset:token")
             toast.success(response.data.message)

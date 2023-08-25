@@ -110,7 +110,7 @@ export type IRegisterCarFormData = {
         password: z.string(),
     })
     
-    export type IUpdatePasswordProvider = z.infer<typeof SchemaUpdatePassword>
+    export type IUpdatePasswordProvider = z.infer<typeof SchemaUpdatePasswordProvider>
 
 
   
