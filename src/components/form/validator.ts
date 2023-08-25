@@ -97,7 +97,7 @@ export type IRegisterCarFormData = {
     export type IRestEmailFormData = z.infer<typeof SchemaRestEmail>
 
     export const SchemaUpdatePassword = z.object({
-        password: z.string().min(10),
+        password: z.string(),
         confirm_password: z.string()
     }).refine(data => data.password === data.confirm_password, {
         message: "Passwords do not match",
