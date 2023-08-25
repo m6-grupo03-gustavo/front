@@ -16,7 +16,6 @@ import {
     IRestEmailFormData, 
     IUpdateAdressFormData, 
     IUpdatePassword,
-    IUpdatePasswordProvider
 } from "../components/Form/validator";
 
 
@@ -263,15 +262,10 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         }
     }
 
-    const updatePassword = async (data: IUpdatePasswordProvider) =>{
+    const updatePassword = async (data: IUpdatePassword ) =>{
         const restToken = localStorage.getItem("@reset:token")
-        const getUser = await api.get("/user")
-        const toSetUser = getUser.data.find((user: IUserResponse)=> user.reset_token === restToken)
-        
-        console.log(restToken, data, toSetUser)
         try{
-            const response = await api.patch(`/user/resetUserPassword/${restToken}`, data.password)
-            console.log(response)
+            const response = await api.patch(`/user/resetUserPassword/${restToken}`,  data)
             localStorage.removeItem("@reset:token")
             toast.success(response.data.message)
         }catch(error){
