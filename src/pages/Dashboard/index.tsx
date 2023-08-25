@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
-import { Container, ProfileAdsList, ProfileInfo } from "./style"
+import { Container, ProfileAdsList, ProfileInfo, StyledToastContainer } from "./style"
 import { api } from "../../service/api"
 import jwt_decode from "jwt-decode"
 import { ModalRegisterCar } from "../../components/Modals/ModalRegisterCar"
@@ -12,6 +12,7 @@ import { ModalAdCreatedSucessfully } from "../../components/Modals/ModalAdCreate
 import { ModalUpdateAdress } from "../../components/Modals/ModalUpdateAddress"
 import { ModalUpdateUserInfo } from "../../components/Modals/ModalUpdateUserInfo"
 import {  BiSolidEditAlt } from 'react-icons/bi'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export const Dashboard = () =>{
@@ -102,6 +103,8 @@ export const Dashboard = () =>{
                 <ModalUpdateAdress/>
                 <ModalUpdateUserInfo/>
                 <Footer/>
+
+                <StyledToastContainer/>
             </>
         )
     }else{
