@@ -265,7 +265,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const updatePassword = async (data: IUpdatePassword ) =>{
         const restToken = localStorage.getItem("@reset:token")
         try{
-            const response = await api.patch(`/user/resetUserPassword/${restToken}`,  data)
+            const response = await api.patch(`/user/resetUserPassword/${restToken}`, data)
+            console.log(response)
             localStorage.removeItem("@reset:token")
             toast.success(response.data.message)
         }catch(error){
