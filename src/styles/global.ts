@@ -149,6 +149,7 @@ body {
   figure, figcaption, footer, header, hgroup, 
   menu, nav, output, ruby, section, summary,
   time, mark, audio, video  {
+
     font-size: 62.5%; /* 10 / 16 = 0.625 */
   }
 }

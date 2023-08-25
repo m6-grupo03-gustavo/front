@@ -1,8 +1,9 @@
 import { Footer } from "../../components/Footer";
 import FomrLogin from "../../components/Form/FormLogin";
 import { Header } from "../../components/Header";
-import { StyledContainerLoginPage } from "./style";
+import { StyledContainerLoginPage, StyledToastContainer } from "./style";
 
+import 'react-toastify/dist/ReactToastify.css';
 export const Login = () => {
   return (
     <>
@@ -10,7 +11,10 @@ export const Login = () => {
       <StyledContainerLoginPage>
         <FomrLogin />
       </StyledContainerLoginPage>
+      <StyledToastContainer theme='dark'/>
       <Footer />
+
+
     </>
   );
 };
