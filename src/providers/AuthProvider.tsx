@@ -288,9 +288,11 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
                 setUser(toSetUser)
                 toast.success(response.data.message)
 
-                setTimeout(() => {
-                    setEmaiModal(false)
-                }, 5000)
+                if(emailModal){
+                    setTimeout(() => {
+                        setEmaiModal(false)
+                    }, 5000)
+                }
             }
         }catch (error) {
             console.log(error)

@@ -5,6 +5,7 @@ import InputOutlined from "../Input"
 import { StyledContainerFormRestEmail } from "./style"
 import { BtnSubmit } from "../../Buttons/btnSubmit"
 import { useAuth } from "../../../hooks/useAuth"
+import { ModalEmail } from "../../Modals/ModalEmail"
 
 export const FormEmailResetPassword = () => {
 
@@ -12,7 +13,7 @@ export const FormEmailResetPassword = () => {
         resolver: zodResolver(SchemaRestEmail)
     })
 
-    const { resetEmail } = useAuth()
+    const { resetEmail, emailModal } = useAuth()
 
     const submit = (data: IRestEmailFormData) =>{
         resetEmail(data)
@@ -20,15 +21,18 @@ export const FormEmailResetPassword = () => {
     }
 
     return(
-        <StyledContainerFormRestEmail>
-            <form onSubmit={(handleSubmit(submit))}>
-                <h2>Password recovery</h2>
-                <span className="text_span">Please provide your email below so that our team can send you a password reset email.</span>
-                <InputOutlined id="email" type="text" label="Email" register={register("email")}/>
-                {errors.email && <p>{errors.email.message}</p>}
-                <BtnSubmit text="Get new password" typeStyle="brand1"/>
-                <a href="/login">Back to login</a>
-            </form>
-        </StyledContainerFormRestEmail>
+        <>
+            <StyledContainerFormRestEmail>
+                <form onSubmit={(handleSubmit(submit))}>
+                    <h2>Password recovery</h2>
+                    <span className="text_span">Please provide your email below so that our team can send you a password reset email.</span>
+                    <InputOutlined id="email" type="text" label="Email" register={register("email")}/>
+                    {errors.email && <p>{errors.email.message}</p>}
+                    <BtnSubmit text="Get new password" typeStyle="brand1"/>
+                    <a href="/login">Back to login</a>
+                </form>
+            </StyledContainerFormRestEmail>
+            {emailModal && <ModalEmail/>}
+        </>
     )
 }
