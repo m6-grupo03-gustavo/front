@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const StyleFieldset =  styled.fieldset`
+    align-self: center;
     position: relative;
     width: 28rem;
     padding: 1rem;

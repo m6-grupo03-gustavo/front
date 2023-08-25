@@ -65,11 +65,77 @@ export const Header = () =>{
                     <h1>Motors <small>Shop</small></h1>
                     
                     <NavButtonDesktopHome>
-                        <Link to={"/login"} id="login_button">Fazer login</Link>
+                        <Link to={"/login"} id="login_button">Login</Link>
                         <Link to={"/register"} id="register_button">Cadastrar</Link>
                     </NavButtonDesktopHome>
     
                 </NavBarHomePage>
+
+            </>
+        )
+
+    }
+    // aqui
+    else if(width > 1200 && location.pathname == '/login'){
+        return(
+            <>
+                <NavBar>
+                    <img src="/Logo.svg" onClick={() => navigate("/")}/>
+                    
+                    <NavButtonDesktop>
+                        <Link to={"/"} id="login_button">Home</Link>
+                        <Link to={"/register"} id="register_button">Cadastrar</Link>
+                    </NavButtonDesktop>
+    
+                </NavBar>
+
+            </>
+        )
+    }
+    else if(width > 1200 && location.pathname == '/register'){
+        return(
+            <>
+                <NavBar>
+                    <img src="/Logo.svg" onClick={() => navigate("/")}/>
+                    
+                    <NavButtonDesktop>
+                        <Link to={"/"} id="login_button">Home</Link>
+                        <Link to={"/login"} id="register_button">Login</Link>
+                    </NavButtonDesktop>
+    
+                </NavBar>
+
+            </>
+        )
+    }
+    else if(width > 1200 && location.pathname == '/user/resetPassword'){
+        return(
+            <>
+                <NavBar>
+                    <img src="/Logo.svg" onClick={() => navigate("/")}/>
+                    
+                    <NavButtonDesktop>
+                        <Link to={"/"} id="login_button">Home</Link>
+                        <Link to={"/login"} id="register_button">Login</Link>
+                    </NavButtonDesktop>
+    
+                </NavBar>
+
+            </>
+        )
+    }
+    else if(width > 1200 && location.pathname == `/user/resetPassword/${user?.reset_token}`){
+        return(
+            <>
+                <NavBar>
+                    <img src="/Logo.svg" onClick={() => navigate("/")}/>
+                    
+                    <NavButtonDesktop>
+                        <Link to={"/"} id="login_button">Home</Link>
+                        <Link to={"/login"} id="register_button">Login</Link>
+                    </NavButtonDesktop>
+    
+                </NavBar>
 
             </>
         )
@@ -125,7 +191,7 @@ export const Header = () =>{
             <NavBar>
                 <img src="/Logo.svg" onClick={() => navigate("/")} id="logo"/>
                 <NavButtonDesktop>
-                    <Link to={"/login"} id="login_button">Fazer login</Link>
+                    <Link to={"/login"} id="login_button">Login</Link>
                     <Link to={"/register"} id="register_button">Cadastrar</Link>
                 </NavButtonDesktop>
             </NavBar>
