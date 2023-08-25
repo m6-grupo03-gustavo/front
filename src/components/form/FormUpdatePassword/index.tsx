@@ -2,9 +2,9 @@ import { useForm } from "react-hook-form";
 import { IUpdatePassword, SchemaUpdatePassword } from "../validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputOutlined from "../Input";
-import { StyledContainerFormRestEmail } from "../FormResetEmail/style";
 import { BtnSubmit } from "../../Buttons/btnSubmit";
 import { useAuth } from "../../../hooks/useAuth";
+import { StyledContainerFormUpdatePassword } from "./style";
 
 export const FormUpdatePassword = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<IUpdatePassword>({
@@ -15,12 +15,12 @@ export const FormUpdatePassword = () => {
 
     const submit = (data: IUpdatePassword) => {
         if (data.password === data.confirm_password) {
-            updatePassword(data.password);
+            updatePassword(data);
             reset();
         }
     };
     return (
-        <StyledContainerFormRestEmail>
+        <StyledContainerFormUpdatePassword>
             <form onSubmit={handleSubmit(submit)}>
                 <h2>Password recovery</h2>
                 <span className="text_span">Please provide your email below so that our team can send you a password reset email.</span>
@@ -31,7 +31,7 @@ export const FormUpdatePassword = () => {
                 <BtnSubmit text="Get new password" typeStyle="brand1" />
                 <a href="/login">Back to login</a>
             </form>
-        </StyledContainerFormRestEmail>
+        </StyledContainerFormUpdatePassword>
     );
 };
 

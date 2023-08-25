@@ -29,7 +29,7 @@ export default function FomrLogin (){
                 <InputOutlined id="password" type="password" label='Password'  register={register('password')}/>
                 {errors.password && <p>{errors.password.message}</p>}
                 <BtnSubmit text='Login' typeStyle='brand1'/>
-                <a href="/login/resetPassword">Forget you password?</a>
+                <a href="/user/resetPassword">Forget you password?</a>
                 <a className='newAccount_link' href='/register'>Create new account</a>
             </form>
         </StyledContainerFormLogin>
