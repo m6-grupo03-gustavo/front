@@ -11,7 +11,7 @@ export const StyledContainerFormRegisterCar = styled.section`
             color: var(--alert1);
             font-weight: 500;
             text-align: center;
-            font-size: var(--font-size-4);
+            font-size: var(--font-size-5);
         }
         h2{
             color: var(--brand1);

@@ -17,7 +17,6 @@ import {
     IUpdateAdressFormData, 
     IUpdateUserInfo,
     IUpdatePassword,
-    IUpdatePasswordProvider
 } from "../components/Form/validator";
 
 
@@ -290,9 +289,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         }
     }
 
-    const updatePassword = async (data: IUpdatePasswordProvider) =>{
+    const updatePassword = async (data: IUpdatePassword ) =>{
         const restToken = localStorage.getItem("@reset:token")
-        console.log(restToken, data)
         try{
             const response = await api.patch(`/user/resetUserPassword/${restToken}`, data)
             console.log(response)
