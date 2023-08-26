@@ -126,7 +126,7 @@ export const SchemaUpdatePassword = z.object({
         password: z.string(),
     })
     
-    export type IUpdatePasswordProvider = z.infer<typeof SchemaUpdatePassword>
+    export type IUpdatePasswordProvider = z.infer<typeof SchemaUpdatePasswordProvider>
 
 
   

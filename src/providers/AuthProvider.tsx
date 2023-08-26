@@ -17,7 +17,6 @@ import {
     IUpdateAdressFormData, 
     IUpdateUserInfo,
     IUpdatePassword,
-    IUpdatePasswordProvider
 } from "../components/Form/validator";
 
 
@@ -147,6 +146,8 @@ interface iAuthContextValues {
         description?: string | undefined;
         request?: IUserResponse;
     } | undefined>
+    setEmaiModal: React.Dispatch<SetStateAction<boolean>>
+    emailModal: boolean
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -274,15 +275,24 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         }
     }
 
+    const [emailModal, setEmaiModal] = useState(false)
+
     const resetEmail = async (data: IRestEmailFormData) => {
         try{
             const response = await api.post("/user/resetUserPassword", data)
             if(response.data.message){
+                setEmaiModal(true)
                 const getUser = await api.get("/user")
                 const toSetUser = getUser.data.find((user: IUserResponse)=> user.email === data.email)
                 localStorage.setItem("@reset:token", toSetUser.reset_token)
                 setUser(toSetUser)
                 toast.success(response.data.message)
+
+                if(emailModal){
+                    setTimeout(() => {
+                        setEmaiModal(false)
+                    }, 5000)
+                }
             }
         }catch (error) {
             console.log(error)
@@ -290,9 +300,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         }
     }
 
-    const updatePassword = async (data: IUpdatePasswordProvider) =>{
+    const updatePassword = async (data: IUpdatePassword ) =>{
         const restToken = localStorage.getItem("@reset:token")
-        console.log(restToken, data)
         try{
             const response = await api.patch(`/user/resetUserPassword/${restToken}`, data)
             console.log(response)
@@ -340,7 +349,9 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             modalUpdateUserInfo,
             setModalUpdateUserInfo,
             userInfoUpdate,
-            updatePassword
+            updatePassword,
+            setEmaiModal,
+            emailModal
         }}>
             {children}
         </AuthContext.Provider>

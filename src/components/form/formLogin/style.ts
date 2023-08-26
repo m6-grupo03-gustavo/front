@@ -28,7 +28,7 @@ export const StyledContainerFormLogin = styled.section`
       color: var(--alert1);
       font-weight: 500;
       text-align: center;
-      font-size: var(--font-size-4);
+      font-size: var(--font-size-5S);
     }
 
     a {
