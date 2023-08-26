@@ -104,12 +104,3 @@ export const ProfileAdsList = styled.ul`
     height: 100%;
     width: 100%;
 `
-
-// export const Card = styled.ul`
-//     height: 100%;
-//     width: 100%;
-
-//     background-color: white;
-
-//     text-align: center;
-// `
