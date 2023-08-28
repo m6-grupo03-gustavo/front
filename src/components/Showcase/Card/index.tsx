@@ -2,6 +2,7 @@ import { useState } from "react"
 import { ICar } from "../../../providers/AuthProvider"
 import { ModalRemoveAd } from "../../Modals/ModalRemoveAd"
 import { UserInitials } from "../../UserInitials"
+import { useNavigate } from "react-router-dom"
 import { 
     StyleCardCar,
      StyleContainerImage, 
@@ -11,6 +12,7 @@ import {
 } from "./style"
 
 import { AiFillDelete } from 'react-icons/ai'
+import { useAuth } from "../../../hooks/useAuth"
 interface ICarCardProps {
     car: ICar
     renderOnAnotherPage?: string
@@ -19,6 +21,16 @@ interface ICarCardProps {
 
 export default function CardCar({car, renderOnAnotherPage}: ICarCardProps){
     const [modalRemoveAdOpen, setModalRemoveAdOpen] = useState(false);
+    const {setCar} = useAuth()
+    const navigate = useNavigate()
+
+    const navigateCar = () => {
+        if (car !== null) {
+            setCar(car)
+            navigate("/product")
+        }
+    }
+
     if(renderOnAnotherPage == 'dashboard'){
         return (
             <StyleCardCar>
@@ -64,7 +76,7 @@ export default function CardCar({car, renderOnAnotherPage}: ICarCardProps){
     }else{
         
             return(
-                <StyleCardCar>
+                <StyleCardCar onClick={() => navigateCar()}>
                     <StyleContainerImage>
                         <img src={car.carImages[0].url} alt={car.model}/>
                     </StyleContainerImage>
