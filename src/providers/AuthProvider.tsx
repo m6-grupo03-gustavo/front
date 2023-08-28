@@ -148,6 +148,8 @@ interface iAuthContextValues {
     } | undefined>
     setEmaiModal: React.Dispatch<SetStateAction<boolean>>
     emailModal: boolean
+    car: ICar | null
+    setCar: React.Dispatch<SetStateAction<null | ICar>>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -168,6 +170,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const [modalRegisterAdSucess, setModalRegisterAdSucess] = useState(false)
     const [modalUpdateAdress, setModalUpdateAdress] = useState(false)
     const [modalUpdateUserInfo, setModalUpdateUserInfo] = useState(false)
+    const [car, setCar] = useState(null)
+
 
 
     useEffect(() => {
@@ -351,7 +355,9 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             userInfoUpdate,
             updatePassword,
             setEmaiModal,
-            emailModal
+            emailModal,
+            car,
+            setCar
         }}>
             {children}
         </AuthContext.Provider>
