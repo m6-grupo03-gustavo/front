@@ -1,43 +1,66 @@
 import {SubmitHandler, useForm} from 'react-hook-form'
-import { StyledContainerFormRegisterCar } from "./style"
+import { StyledContainerFormUpdateCar } from "./style"
 import InputOutlined from '../Input';
-import {  IRegisterCarFormData, brandOptions, colorOptions, fuelOptions, schemaRegisterCar } from '../validator';
+import { IUpdateCarFormData, brandOptions, colorOptions, fuelOptions, isPublisehdOptions, schemaUpdateCar } from '../validator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BtnSubmit } from '../../Buttons/btnSubmit';
 import { useAuth } from '../../../hooks/useAuth';
+import { useEffect } from 'react';
 import SelectOutlined from '../Select';
-// import InputImage from '../InputImage';
 
 
+export default function FormUpdateCar (){
 
-
-export default function FomrRegisterCar (){
-
-    const { register, handleSubmit,  formState: { errors } } = useForm<IRegisterCarFormData>({
-        resolver: zodResolver(schemaRegisterCar)
+    const { register, handleSubmit, setValue,  formState: { errors } } = useForm<IUpdateCarFormData>({
+        resolver: zodResolver(schemaUpdateCar)
     })
 
-    const { carCreate } = useAuth()  
-    
-    const submit: SubmitHandler<IRegisterCarFormData> = (data) =>{
+    const { car, carUpdate } = useAuth()  
 
-        data.value = Number(data.value);
-        data.km = Number(data.km);
-        data.is_published = true;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const newImageData: any = {
-            "url": data.carImages
+    useEffect(() => {
+        
+        if (car != null) {
+            setValue('brand', car.brand)
+            setValue('model', car.model)
+            setValue('year', car.year)
+            setValue('fuel', car.fuel)
+            setValue('value', car.value.toString())
+            setValue('description', car.description)
+            setValue('color', car.color)
+            setValue('km', car.km.toString())
+            setValue('is_published', car.is_published.toString())
+            setValue('carImages', car.carImages[0].url)
         }
+    }, [])
+    
+    const submit: SubmitHandler<IUpdateCarFormData> = (data) =>{
+        if(car){
+            data.value = Number(data.value);
+            data.km = Number(data.km);
 
-        data.carImages = [newImageData]
-        carCreate(data)
+            if(data.is_published == 'false'){
+                data.is_published = false;
+                console.log(data.is_published)
+            }else {
+                data.is_published = true
+            }
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const newImageData: any = {
+                "url": data.carImages
+            }
+
+            data.carImages = [newImageData]
+            console.log(data)
+            carUpdate(data, car.id)
+        }
     }
 
-      
+
     return(
-        <StyledContainerFormRegisterCar>
-            <form onSubmit={handleSubmit(submit)}>
-                <h2>Register <span>Car</span></h2>
+        <StyledContainerFormUpdateCar>
+          <form onSubmit={handleSubmit(submit)}>
+                <h2>Update <span>Car</span></h2>
                 <SelectOutlined id="brand" register={register('brand')} label="Marca" options={brandOptions} />
                 {errors.brand && <p>{errors.brand.message}</p>}
 
@@ -66,6 +89,9 @@ export default function FomrRegisterCar (){
 
                 <InputOutlined id="description" type="text" label='Descrição' register={register('description')}/>
 
+                <SelectOutlined id="isPublished" register={register('is_published')} label="Publicado" options={isPublisehdOptions} />
+                {errors.is_published && <p>{errors.is_published.message}</p>}
+
                         {/* Temp */}
                         <InputOutlined
                         id="carImages"
@@ -78,6 +104,6 @@ export default function FomrRegisterCar (){
 
                 <BtnSubmit text='Register' typeStyle='brand1'/>
             </form>
-        </StyledContainerFormRegisterCar>
+        </StyledContainerFormUpdateCar>
     ) 
 }

@@ -6,7 +6,7 @@ interface ISelectOutlined extends SelectHTMLAttributes<HTMLSelectElement> {
     id: string;
     label: string;
     register: UseFormRegisterReturn<string>;
-    options: { value: string, label: string }[];
+    options: { value: string , label: string }[];
 }
 
 

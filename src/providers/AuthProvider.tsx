@@ -149,7 +149,19 @@ interface iAuthContextValues {
     setEmaiModal: React.Dispatch<SetStateAction<boolean>>
     emailModal: boolean
     car: ICar | null
-    setCar: React.Dispatch<SetStateAction<null | ICar>>
+    setCar: React.Dispatch<SetStateAction<ICar | null>>
+    modalRemoveUser: boolean
+    setModalRemoveUser: React.Dispatch<SetStateAction<boolean>>
+    userRemove: (id: number) => Promise<void>
+    carUpdate: (data: IUpdateUserInfo, id: number) => Promise<{
+        name?: string | undefined;
+        email?: string | undefined;
+        phone?: string | undefined;
+        cpf?: string | undefined;
+        birthdate?: string | undefined;
+        description?: string | undefined;
+        request?: ICar;
+    } | undefined>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -170,7 +182,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const [modalRegisterAdSucess, setModalRegisterAdSucess] = useState(false)
     const [modalUpdateAdress, setModalUpdateAdress] = useState(false)
     const [modalUpdateUserInfo, setModalUpdateUserInfo] = useState(false)
-    const [car, setCar] = useState(null)
+    const [car, setCar] = useState<ICar | null>(null)
+    const [modalRemoveUser, setModalRemoveUser] = useState(false)
 
 
 
@@ -245,6 +258,33 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         } catch (error) {
             console.error(error)
             toast.error('...')
+        }
+    }
+
+    const userRemove = async (id: number) =>{
+        try {
+            const token = localStorage.getItem("@fipe:token")
+            api.defaults.headers.common.Authorization = `Bearer ${token}`
+            await api.delete<ICar>(`/user/${id}`)
+            toast.success('Usuário deletado com sucesso')
+            window.localStorage.removeItem("@fipe:token")
+            navigate('/')
+        } catch (error) {
+            console.error(error)
+            toast.error('...')
+        }
+    }
+
+    const carUpdate= async (data: IUpdateUserInfo, id: number) =>{
+        try {
+            const token = localStorage.getItem("@fipe:token")
+            api.defaults.headers.common.Authorization = `Bearer ${token}`
+            const response = await api.patch(`/car/${id}`, data)
+            toast.success('Car updated successfully')
+            return {...response, ...data}
+        } catch (error) {
+            toast.error('Unable to update')
+            console.error(error)
         }
     }
 
@@ -357,7 +397,11 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             setEmaiModal,
             emailModal,
             car,
-            setCar
+            setCar,
+            modalRemoveUser,
+            setModalRemoveUser,
+            userRemove,
+            carUpdate
         }}>
             {children}
         </AuthContext.Provider>

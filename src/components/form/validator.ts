@@ -128,6 +128,81 @@ export const SchemaUpdatePassword = z.object({
     
     export type IUpdatePasswordProvider = z.infer<typeof SchemaUpdatePasswordProvider>
 
+    export const schemaUpdateCar = z.object({
+        brand: z.string().optional(),
+        model: z.string().optional(),
+        year: z.string().optional(),
+        fuel: z.string().optional(),
+        value: z.string().optional(),
+        description: z.string().optional(),
+        color: z.string().optional(),
+        km: z.string().optional(),
+        carImages: z.string().optional(),
+        is_published: z.string().optional()
+    })
+    
+    export type IUpdateCarFormData =  {
+        brand: string
+        model: string
+        year: string
+        fuel: string
+        value: number | string
+        description: string
+        color: string
+        km: number | string
+        carImages: IImageRequest[] | string
+        is_published: boolean | string
+    }
 
-  
+    export const isPublisehdOptions = [
+        { value: 'true', label: 'Sim' },
+        { value:'false', label: 'Não' },
+      ]
+
+    export const colorOptions = [
+        { value: 'amarelo', label: 'Amarelo' },
+        { value: 'azul', label: 'Azul' },
+        { value: 'bege', label: 'Bege' },
+        { value: 'branco', label: 'Branco' },
+        { value: 'cinza', label: 'Cinza' },
+        { value: 'prata', label: 'Prata' },
+        { value: 'preto', label: 'Preto' },
+        { value: 'verde', label: 'Verde' },
+        { value: 'vermelho', label: 'Vermelho' },
+        { value: 'outros', label: 'Outros' },
+      ];
+
+     export  const brandOptions = [
+        { value: 'Audi', label: 'Audi' },
+        { value: 'BMW', label: 'BMW' },
+        { value: 'Caoa Chery', label: 'Caoa Chery' },
+        { value: 'Chevrolet', label: 'Chevrolet' },
+        { value: 'Citroën', label: 'Citroën' },
+        { value: 'Fiat', label: 'Fiat' },
+        { value: 'Ferrari', label: 'Ferrari' },
+        { value: 'Ford', label: 'Ford' },
+        { value: 'Honda', label: 'Honda' },
+        { value: 'Hyundai', label: 'Hyundai' },
+        { value: 'Jeep', label: 'Jeep' },
+        { value: 'Kia', label: 'Kia' },
+        { value: 'Land Rover', label: 'Land Rover' },
+        { value: 'Mercedes-Benz', label: 'Mercedes-Benz' },
+        { value: 'Mitsubishi', label: 'Mitsubishi' },
+        { value: 'Nissan', label: 'Nissan' },
+        { value: 'Porsche', label: 'Porsche' },
+        { value: 'Peugeot', label: 'Peugeot' },
+        { value: 'Renault', label: 'Renault' },
+        { value: 'Toyota', label: 'Toyota' },
+        { value: 'Volvo', label: 'Volvo' },
+        { value: 'Volkswagen', label: 'Volkswagen' },
+        { value: 'Outros', label: 'Outros' },
+      ]
+
+     export const fuelOptions = [
+        { value: 'Gasolina', label: 'Gasolina' },
+        { value: 'Etanol', label: 'Etanol' },
+        { value: 'Eletrico', label: 'Elétrico' },
+        { value: 'Disel', label: 'Disel' },
+        { value: 'Flex', label: 'Flex' },
+      ]
 

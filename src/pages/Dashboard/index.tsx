@@ -12,11 +12,13 @@ import { ModalAdCreatedSucessfully } from "../../components/Modals/ModalAdCreate
 import { ModalUpdateAdress } from "../../components/Modals/ModalUpdateAddress"
 import { ModalUpdateUserInfo } from "../../components/Modals/ModalUpdateUserInfo"
 import {  BiSolidEditAlt } from 'react-icons/bi'
+import {  AiTwotoneDelete } from 'react-icons/ai'
 import 'react-toastify/dist/ReactToastify.css';
+import { ModalRemoveUser } from "../../components/Modals/ModalRemoveUser"
 
 
 export const Dashboard = () =>{
-    const { setModal, user, setUser, dashboardCars, setDashboardCars, setModalUpdateAdress, setModalUpdateUserInfo } = useAuth()
+    const { setModal, user, setUser, dashboardCars, setDashboardCars, setModalUpdateAdress, setModalUpdateUserInfo, setModalRemoveUser } = useAuth()
 
     useEffect(() => {
         (async () => {
@@ -83,6 +85,15 @@ export const Dashboard = () =>{
                                     }}/>
                                     <p onClick={() => setModalUpdateAdress(true)}>Editar Endereço</p>
                                 </div>
+                                
+                                <div className="figureUpdate"   onClick={() => setModalRemoveUser(true)}>
+                                    <AiTwotoneDelete size={40} style={{
+                                                color:  "#4529E6",
+                                                cursor: 'pointer',
+                                                margin: "0"
+                                    }}/>
+                                    <p onClick={() => setModalRemoveUser(true)}>Deletar meu usuário</p>
+                                </div>
                             </div>
   
                         </header>
@@ -102,6 +113,7 @@ export const Dashboard = () =>{
                 <ModalAdCreatedSucessfully/>
                 <ModalUpdateAdress/>
                 <ModalUpdateUserInfo/>
+                <ModalRemoveUser id={user.id}/>
                 <Footer/>
 
                 <StyledToastContainer/>
