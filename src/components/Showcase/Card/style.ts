@@ -10,6 +10,10 @@ export const StyleCardCar =  styled.li`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    .containerTools{
+        display: flex;
+        gap: 10px;
+    }
 
     @media(min-width: 800px){
         width: 31.2rem;
