@@ -10,6 +10,7 @@ export const StyleContainerSubmit =  styled.button<{ typeStyle: "brand1" | "bran
     align-items: center;
     padding:  1rem 3rem;
     font-size: var(--font-size-4);
+    margin: 2rem;
     /* max-width: 90%; */
     
 

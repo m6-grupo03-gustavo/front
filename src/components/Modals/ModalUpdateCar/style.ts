@@ -28,5 +28,4 @@ export const StyleModalUpdateCar = styled.div`
         align-items: center;
         gap: 4rem;
     }
-
 `

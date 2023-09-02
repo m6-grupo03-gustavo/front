@@ -104,8 +104,8 @@ export default function CardCar({car, renderOnAnotherPage}: ICarCardProps){
                     </StyleContainerCarInfo>
         
                     <StyleContainerUserIfo>
-                        <UserInitials userId={car.id} userName={car.model}/>
-                        <h6>{car.model}</h6>
+                        <UserInitials userId={car.user.id} userName={car.user.name}/>
+                        <h6>{car.user.name}</h6>
                     </StyleContainerUserIfo>
         
                     <StyleContainerDetailCar>
