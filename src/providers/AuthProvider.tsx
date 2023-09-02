@@ -85,6 +85,7 @@ export interface ICar {
     is_published: boolean
     user_id: number
     carImages: IImage[]
+    user: IRegisterResponse
 }
 
 export interface IResponseGetCars{

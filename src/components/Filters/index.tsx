@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { BtnSubmit } from "../Buttons/btnSubmit";
 import { StyleDesktopFilters, StyleModalFilters } from "./style";
@@ -16,7 +16,34 @@ import { FilterByKM } from "./FilterByKm";
 export const FilterMain = () =>{
     const { mobileFilterMain, setMobileFilterMain } = useAuth()
     const [width, setWidth] = useState(window.innerWidth);
+    const modalRef = useRef<HTMLDivElement>(null)
 
+    useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const handleOutclick = (e: any) => {
+
+            if(!modalRef.current?.contains(e.target)){
+                setMobileFilterMain(false)
+            }
+        }
+        window.addEventListener('mousedown',handleOutclick )
+        return () => {
+            window.removeEventListener('mousedown', handleOutclick )
+        }
+    }, [])
+
+
+    useEffect(() => {
+        const handleKeydown = (e: KeyboardEvent) => {
+            if(e.key == 'Escape'){
+                setMobileFilterMain(false)
+            }   
+        }
+        window.addEventListener('keydown', handleKeydown )
+        return () => {
+            window.removeEventListener('keydown', handleKeydown )
+        }
+    }, [])
 
     useEffect(() => {
         //  função que atualize o estado com a nova largura da tela
@@ -44,9 +71,9 @@ export const FilterMain = () =>{
     }else if(width <= 1200 && mobileFilterMain == true ){
         return(
             <StyleModalFilters>
-                    {/* Transformar em componente */}
-                    <span onClick={() => setMobileFilterMain(false)} >X</span>
+                <article ref={modalRef} className="container__modal--filter">
                     <AllFilters/>
+                </article>
             </StyleModalFilters>
         )
     }else if(width > 1200) {
@@ -64,8 +91,7 @@ const AllFilters = () =>{
     const { cars, setCarsFilter } = useAuth()
         
         return(
-            <>
-                {/*  componentes de filtro aqui */}
+            <div className="container__filters--all">
                 <FilterByBrand/>
                 <FilterByModel/>
                 <FilterByColor/>
@@ -73,8 +99,9 @@ const AllFilters = () =>{
                 <FilterByYear/>
                 <FilterByKM/>
                 <FilterByPrice/>
-                <BtnSubmit onClick={() => setCarsFilter(cars)} text={"Limpar filtros"} typeStyle={"brand1"}/>
-            </>
+                <div className="container__btn--filter">
+                    <BtnSubmit  onClick={() => setCarsFilter(cars)} text={"Limpar filtros"} typeStyle={"brand1"}/>
+                </div>
+            </div>
         )
-  
 }
