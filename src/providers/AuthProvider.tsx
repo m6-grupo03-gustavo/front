@@ -21,6 +21,7 @@ import {
 
 
 
+
 interface iAuthProviderProps {
     children: ReactNode
 }
@@ -95,6 +96,37 @@ export interface IResponseGetCars{
     data: ICar[]
 }
 
+
+// interface carsFIPE
+export interface ICarFIPE{
+    name: string
+}
+
+export interface IAllCarFIPE{
+    chevrolet: ICarFIPE[]
+    citroën: ICarFIPE[]
+    fiat: ICarFIPE[]
+    ford: ICarFIPE[]
+    honda: ICarFIPE[]
+    hyundai: ICarFIPE[]
+    nissan: ICarFIPE[]
+    peugeot: ICarFIPE[]
+    renault: ICarFIPE[]
+    toyota: ICarFIPE[]
+    volkswagen: ICarFIPE[]
+}
+
+export interface ICarFIPEDetail{
+    id: string
+    name: string
+    bran: string
+    year: string
+    fuel: 1 | 2 | 3
+    value: number
+}
+
+
+
 interface iAuthContextValues {
     modal: string
     setModal: React.Dispatch<React.SetStateAction<string>>
@@ -163,6 +195,10 @@ interface iAuthContextValues {
         description?: string | undefined;
         request?: ICar;
     } | undefined>
+    carsTableFIPE: IAllCarFIPE | null
+    setCarsTableFIPE: React.Dispatch<SetStateAction<IAllCarFIPE | null>>
+    carsTableFIPEByBranch: ICarFIPEDetail[] | null
+    setCarsTableFIPEByBranch: React.Dispatch<SetStateAction<ICarFIPEDetail[] | null>>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -186,7 +222,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const [car, setCar] = useState<ICar | null>(null)
     const [modalRemoveUser, setModalRemoveUser] = useState(false)
 
-
+    const [carsTableFIPE, setCarsTableFIPE ] = useState<IAllCarFIPE | null>(null)
+    const [carsTableFIPEByBranch, setCarsTableFIPEByBranch ] = useState<ICarFIPEDetail[] | null>(null)
 
     useEffect(() => {
         const token = localStorage.getItem("@fipe:token")
@@ -402,7 +439,11 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             modalRemoveUser,
             setModalRemoveUser,
             userRemove,
-            carUpdate
+            carUpdate,
+            carsTableFIPE,
+            setCarsTableFIPE,
+            carsTableFIPEByBranch,
+            setCarsTableFIPEByBranch
         }}>
             {children}
         </AuthContext.Provider>

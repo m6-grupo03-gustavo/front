@@ -1,29 +1,45 @@
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { StyledContainerFormRegisterCar } from "./style"
 import InputOutlined from '../Input';
-import {  IRegisterCarFormData, brandOptions, colorOptions, fuelOptions, schemaRegisterCar } from '../validator';
+import {  IRegisterCarFormData, colorOptions, schemaRegisterCar } from '../validator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BtnSubmit } from '../../Buttons/btnSubmit';
 import { useAuth } from '../../../hooks/useAuth';
 import SelectOutlined from '../Select';
-// import InputImage from '../InputImage';
-
-
+import { useEffect, useState } from 'react';
+import { apiFipe } from '../../../service/apiFipe';
+import { IAllCarFIPE, ICarFIPE, ICarFIPEDetail } from '../../../providers/AuthProvider';
 
 
 export default function FomrRegisterCar (){
-
     const { register, handleSubmit,  formState: { errors } } = useForm<IRegisterCarFormData>({
         resolver: zodResolver(schemaRegisterCar)
     })
 
     const { carCreate } = useAuth()  
+    const [currentCar, setCurrentCar ] = useState<ICarFIPEDetail | null>(null)
+
+    const [optionsBrand, setOptionsBrand] = useState<{ value: string , label: string }[] | []>([])
+    const [modelOptionsByBrand, setModelOptionsByBrand] = useState<{ value: string , label: string }[] | []>([])
+
+    const [currentBrand, setCurrentBrand] = useState<string>('')
+    const [currentModel, setCurrentModel] = useState<string>('')
+    const [currentYear, setCurrentYear] = useState<string | number>('')
+    const [currentFuel, setCurrentFuel] = useState<string | number>('')
+
     
+
     const submit: SubmitHandler<IRegisterCarFormData> = (data) =>{
 
         data.value = Number(data.value);
         data.km = Number(data.km);
         data.is_published = true;
+
+        if(currentCar != null){
+            data.fuel = formatFuelNumber(currentCar.fuel)
+            data.year = currentCar.year
+        }
+
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const newImageData: any = {
             "url": data.carImages
@@ -33,36 +49,143 @@ export default function FomrRegisterCar (){
         carCreate(data)
     }
 
-      
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleBrandChange = (event: any) => {
+        setCurrentBrand(event.target.value); // Atualiza a marca sempre que um novo valor é selecionado
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleModelChange = (event: any) => {
+        setCurrentModel(event.target.value); // Atualiza a marca sempre que um novo valor é selecionado
+    };
+
+
+    const formatOptionsSelect = (list: ICarFIPE[]) => {
+        const format =  list.map((carFipeDetail) => ({
+            value: carFipeDetail.name,
+            label: carFipeDetail.name,
+        }));
+        setModelOptionsByBrand(format)
+    };
+
+    const formatOptionsSelectByKey = (list: string[]) => {
+        const format =  list.map((str) => ({
+            value: str,
+            label: str,
+        }));
+        setOptionsBrand(format)
+    };
+
+    const formatFuelNumber = (number: 1 | 2 | 3) => {
+        if(number == 1){
+            return 'Gasolina'
+        }
+        else if( number == 2){
+            return 'Elétrico'
+        }
+        else{
+            return 'Flex'
+        }
+    };
+
+    
+    useEffect(() => {
+        (async () => {
+          const apiResponse = await apiFipe.get(`/cars`);
+          const response: IAllCarFIPE = apiResponse.data
+          if (response === null || response === undefined) {
+            // Lidar com o caso em que carsTableFIPE é null
+          } else {
+            const keys = Object.keys(response) as Array<keyof typeof response>
+            formatOptionsSelectByKey(keys)
+            if(currentBrand == 'chevrolet'){
+                formatOptionsSelect(response.chevrolet)
+            }else if(currentBrand == 'citroën'){
+                formatOptionsSelect(response.citroën)
+            }else if( currentBrand == 'fiat'){
+                formatOptionsSelect(response.fiat)
+            }else if( currentBrand == 'ford'){
+                formatOptionsSelect(response.ford)
+            }else if( currentBrand == 'honda'){
+                formatOptionsSelect(response.honda)
+            }else if( currentBrand == 'hyundai'){
+                formatOptionsSelect(response.hyundai)
+            }else if( currentBrand == 'nissan'){
+                formatOptionsSelect(response.nissan)
+            }else if( currentBrand == 'peugeot'){
+                formatOptionsSelect(response.peugeot)
+            }else if( currentBrand == 'renault'){
+                formatOptionsSelect(response.renault)
+            }else if( currentBrand == 'toyota'){
+                formatOptionsSelect(response.toyota)
+            }else if( currentBrand == 'volkswagen'){
+                formatOptionsSelect(response.volkswagen)
+            }else {
+                formatOptionsSelect([])
+            }
+
+          }
+        })();
+      }, [currentBrand]);
+    
+
+    useEffect(() => {
+        (async () => {
+            const responseByBranch  =  await apiFipe.get(`/cars?brand=${currentBrand}`)
+            const currentObj = responseByBranch.data.find((car: ICarFIPEDetail) =>{
+                if(car.name == currentModel){
+                    return car
+                }
+                 
+            })
+            setCurrentYear(currentObj.year)
+            setCurrentFuel(currentObj.fuel)
+        })()
+    }, [currentModel])
+    
+    useEffect(() => {
+        (async () => {
+            try {
+                const responseDetail =  await apiFipe.get(`/cars/unique?brand=${currentBrand}&name=${currentModel}&year=${currentYear}&fuel=${currentFuel}`)
+                setCurrentCar(responseDetail.data)
+
+            } catch (error) {
+                console.error(error)
+            }
+        })()
+    }, [currentYear])
+   
+     
     return(
         <StyledContainerFormRegisterCar>
             <form onSubmit={handleSubmit(submit)}>
                 <h2>Register <span>Car</span></h2>
-                <SelectOutlined id="brand" register={register('brand')} label="Marca" options={brandOptions} />
+                <SelectOutlined id="brand" register={register('brand')} label="Marca" options={optionsBrand} onChange={handleBrandChange}/>
                 {errors.brand && <p>{errors.brand.message}</p>}
 
-                <InputOutlined id="model" type="text" label='Modelo' register={register('model')}/>
+                <SelectOutlined id="model" register={register('model')} label="Modelo" options={modelOptionsByBrand} onChange={handleModelChange} />
                 {errors.model && <p>{errors.model.message}</p>}
-
+             
                 <div>
-                    <InputOutlined id="year" type="text" label='Ano' register={register('year')}/>
-                    {errors.year && <p>{errors.year.message}</p>}
-                    <SelectOutlined id="fuel" register={register('fuel')} label="Combustível" options={fuelOptions} />
-                    {errors.fuel && <p>{errors.fuel.message}</p>}
+                    {currentCar == null ? <span className='containerValueFIPE'> Ano </span> : <span className='containerValueFIPE'>{currentCar.year}</span>}
+                    {currentCar == null ? <span className='containerValueFIPE'> Combustivel </span> : <span className='containerValueFIPE'>{formatFuelNumber(currentCar.fuel)}</span>}
                 </div>
 
                 <div>
-                    {/* Type number */}
-                    <InputOutlined id="km" type="number" label='Quilometragem' register={register('km')}/> 
+                    <InputOutlined id="km" type="number" label='KM' register={register('km')}/> 
                     {errors.km && <p>{errors.km.message}</p>}
                     <SelectOutlined id="color" register={register('color')} label="Cor" options={colorOptions} />
                     {errors.color && <p>{errors.color.message}</p>}
                 </div>
-                    {/* Type number */}
-                <InputOutlined id="value" type="number" label='Preço' register={register('value')}/>
-                {errors.value && <p>{errors.value.message}</p>}
 
- 
+                <div>
+                    <InputOutlined id="value" type="number" label='Preço' register={register('value')}/>
+                    {errors.value && <p>{errors.value.message}</p>}
+
+                    <div>
+                        {currentCar == null ? <span className='containerValueFIPE'> Valor </span> : <span className='containerValueFIPE'>R${currentCar.value},00</span> }
+                    </div> 
+
+                </div>
 
                 <InputOutlined id="description" type="text" label='Descrição' register={register('description')}/>
 

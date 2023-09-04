@@ -10,6 +10,7 @@ import SelectOutlined from '../Select';
 
 
 
+
 export default function FomrRegister (){
 
     const { register, handleSubmit, formState: { errors } } = useForm<IRegisterFormData>({
@@ -26,6 +27,7 @@ export default function FomrRegister (){
         { value: 'buyer', label: 'Comprador' },
         { value: 'seller', label: 'Anunciante' },
       ];
+
 
     return(
         <StyledContainerFormRegister>
