@@ -7,12 +7,13 @@ interface IImputOutlined extends InputHTMLAttributes<HTMLInputElement> {
     type: "text" | "password" | "email" | 'number';
     label: string;
     register: UseFormRegisterReturn<string>;
+    onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-export default  function InputOutlined ({id, register, type, label}: IImputOutlined){
+export default  function InputOutlined ({id, register, type, label, onChange}: IImputOutlined){
     return(
         <StyleFieldset >
-            <input type={type} required id={id}  {...register}/>
+            <input type={type} required id={id}  {...register} onChange={onChange}  />
             <span>{label}</span>
         </StyleFieldset>
     ) 
