@@ -1,6 +1,6 @@
 import axios from "axios"
 
 export const api = axios.create({
-    baseURL: 'http://127.0.0.1:3000',
+    baseURL: 'https://api-cars-z369.onrender.com/',
     timeout: 5000
 })
