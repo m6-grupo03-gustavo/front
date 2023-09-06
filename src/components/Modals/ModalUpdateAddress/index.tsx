@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import { useAuth } from "../../../hooks/useAuth"
 import { StyleModalUpdateAdress } from "./style"
-import FormUpdateAdress from "../../Form/FormUpdateAdress"
+import FormUpdateAdress from "../../form/FormUpdateAdress"
 
 export const ModalUpdateAdress = () => {
     const {  modalUpdateAdress, setModalUpdateAdress } = useAuth()

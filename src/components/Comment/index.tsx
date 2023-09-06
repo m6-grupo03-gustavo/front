@@ -1,7 +1,12 @@
 import { IComment } from "../../pages/ProductPage"
 import { UserInitials } from "../UserInitials"
 
-export const Comment = ({comment}: IComment) => {
+
+interface ICommentProps {
+    comment: IComment
+}
+
+export const Comment = ({comment}: ICommentProps) => {
     return (
         <li>
             <div className="comment_header">

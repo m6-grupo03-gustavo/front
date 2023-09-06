@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import { StyleModalUpdateCar } from "./style"
-import FormUpdateCar from "../../Form/FormUpdateCar"
+import FormUpdateCar from "../../form/FormUpdateCar"
 
 interface IModalUpdateCar{
     id: number

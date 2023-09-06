@@ -34,8 +34,6 @@ export default function FormUpdateCar (){
 
     useEffect(() => {
         if (car != null) {
-            console.log(car.brand)
-            console.log(car.model)
             setValue('brand', car.brand)
             setValue('model', car.model)
             setValue('value', car.value.toString())
@@ -125,7 +123,6 @@ export default function FormUpdateCar (){
 
             if(data.is_published == 'false'){
                 data.is_published = false;
-                console.log(data.is_published)
             }else {
                 data.is_published = true
             }
@@ -139,7 +136,6 @@ export default function FormUpdateCar (){
                 data.year = currentCar?.year.toString()
             }
             data.carImages = [newImageData]
-            console.log(data)
             carUpdate(data, car.id)
         }
     }
