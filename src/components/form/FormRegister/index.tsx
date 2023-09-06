@@ -1,6 +1,6 @@
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { StyledContainerFormRegister } from "./style"
-import InputOutlined from '../Input';
+import InputOutlined from '../input';
 import { IRegisterFormData, schemaRegister } from '../validator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BtnSubmit } from '../../Buttons/btnSubmit';

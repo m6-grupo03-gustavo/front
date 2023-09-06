@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledContainerFormLogin = styled.section`
+export const StyledContainerFormLoginData = styled.section`
   position: relative;
   width: 35rem;
   /* height: 42rem; */

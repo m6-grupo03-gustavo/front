@@ -1,5 +1,5 @@
 import { Footer } from "../../components/Footer";
-import FomrLogin from "../../components/form/FormLogin";
+import FomrLogin from "../../components/form/formLogin";
 import { Header } from "../../components/Header";
 import { StyledContainerLoginPage, StyledToastContainer } from "./style";
 
