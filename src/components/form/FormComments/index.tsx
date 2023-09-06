@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 export default function FormComment (){
 
-    const { register, handleSubmit, reset } = useForm({
+    const { register, handleSubmit, reset } = useForm<{ comment: string }>({
         resolver: zodResolver(schemaComment)
     })
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import { useAuth } from "../../../hooks/useAuth"
 import { StyleModalRegisterCar } from "./style"
-import FomrRegisterCar from "../../Form/FormRegisterCar"
+import FomrRegisterCar from "../../form/FormRegisterCar"
 
 
 

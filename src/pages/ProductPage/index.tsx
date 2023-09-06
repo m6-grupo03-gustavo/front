@@ -10,27 +10,32 @@ import { Comment } from "../../components/Comment"
 import FormComment from "../../components/form/FormComments"
 
 export interface IComment {
-   id: string
+   id: number
    comment: string
-   register_date: Date
+   register_date: string
+   username: string
+   userid: number
 }
 
 export const ProductPage = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [token, setToken]: any = useState(false)
     const [comments, setComments] = useState<IComment[] | null>(null)
-    const {car, setCar, user} = useAuth()
+    const {car, setCar, currentUser} = useAuth()
 
     useEffect(() => {
         (async () => {
             try {
                     setToken(localStorage.getItem("@fipe:token"))
                     api.defaults.headers.common.Authorization = `Bearer ${token}`
+                    if(car != null){
 
-                    const responseCar = await api.get(`car/${car.id}`)
-                    setCar(responseCar.data)
-
-                    const responseComments = await api.get(`comments/${car.id}`)
-                    setComments(responseComments.data)
+                        const responseCar = await api.get(`car/${car.id}`)
+                        setCar(responseCar.data)
+    
+                        const responseComments = await api.get(`comments/${car.id}`)
+                        setComments(responseComments.data)
+                    }
             } catch (error) {
                 console.error(error)
             }
@@ -82,7 +87,7 @@ export const ProductPage = () => {
                                 </CommentsSection>
                                 <PostCommentSection>
                                     <div className="post_comment_header">
-                                        {user ? <> <UserInitials userId={user.id} userName={user.name}/> <h2>{user.name}</h2> </> : <h2>Faça o login para comentar</h2>}
+                                        {currentUser ? <> <UserInitials userId={currentUser.id} userName={currentUser.name}/> <h2>{currentUser.name}</h2> </> : <h2>Faça o login para comentar</h2>}
                                     </div>
                                     <FormComment/>
                                     <div className="sugestions_container">

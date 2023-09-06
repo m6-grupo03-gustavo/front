@@ -18,8 +18,8 @@ import {
     IUpdateUserInfo,
     IUpdatePassword,
     IRegisterComment,
-} from "../components/Form/validator";
-
+} from "../components/form/validator";
+import jwt_decode from "jwt-decode"
 
 
 
@@ -201,6 +201,8 @@ interface iAuthContextValues {
     setCarsTableFIPE: React.Dispatch<SetStateAction<IAllCarFIPE | null>>
     carsTableFIPEByBranch: ICarFIPEDetail[] | null
     setCarsTableFIPEByBranch: React.Dispatch<SetStateAction<ICarFIPEDetail[] | null>>
+    currentUser: IUserResponse | null
+    setCurrentUser: React.Dispatch<SetStateAction<IUserResponse | null>>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -222,10 +224,12 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const [modalUpdateAdress, setModalUpdateAdress] = useState(false)
     const [modalUpdateUserInfo, setModalUpdateUserInfo] = useState(false)
     const [car, setCar] = useState<ICar | null>(null)
+    const [currentUser, setCurrentUser] = useState<IUserResponse | null>(null)
     const [modalRemoveUser, setModalRemoveUser] = useState(false)
 
     const [carsTableFIPE, setCarsTableFIPE ] = useState<IAllCarFIPE | null>(null)
     const [carsTableFIPEByBranch, setCarsTableFIPEByBranch ] = useState<ICarFIPEDetail[] | null>(null)
+
 
     useEffect(() => {
         const token = localStorage.getItem("@fipe:token")
@@ -249,7 +253,25 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             localStorage.setItem("@fipe:token", token)
             setLoading(false)
             toast.success('User logged in successfully')
-            navigate("dashboard")
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const decodedToken : any = jwt_decode(token);
+            const userEmail: string = decodedToken.userEmail
+
+            const responseAllUsers =  await api.get('/user')
+            const listData :IUserResponse[] = responseAllUsers.data
+
+            const currentUserByMail = listData.find(user => user.email === userEmail);
+
+            if(currentUserByMail){
+                setCurrentUser(currentUserByMail)
+            }
+  
+            if(currentUserByMail?.account_state == 'buyer'){  
+                navigate('/')
+            }else{
+                navigate("dashboard")
+            }
         }
         catch (error) {
             toast.error('Incorrect data')
@@ -272,6 +294,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const userLogout = () =>{
         window.localStorage.removeItem("@fipe:token")
         toast.success('User Logged Out')
+        setCurrentUser(null)
         navigate('/login')
     }
 
@@ -388,7 +411,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         const restToken = localStorage.getItem("@reset:token")
         try{
             const response = await api.patch(`/user/resetUserPassword/${restToken}`, data)
-            console.log(response)
+
             localStorage.removeItem("@reset:token")
             toast.success(response.data.message)
         }catch(error){
@@ -457,11 +480,15 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             carsTableFIPEByBranch,
             setCarsTableFIPEByBranch,
             registerComment,
+            currentUser,
+            setCurrentUser
         }}>
             {children}
         </AuthContext.Provider>
     )
 }
+
+
 
 
 
