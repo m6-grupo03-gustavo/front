@@ -17,6 +17,19 @@ export const NavBar = styled.div`
         cursor: pointer;
     }
 
+    .containerCurrentUser{
+        max-width: 250px;
+        gap: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        p{
+            font-size: 2rem;
+            color: black;
+            letter-spacing: 2px;
+        }
+    }
+
 `
 
 
@@ -29,6 +42,7 @@ export const NavBarHomePage = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
 
     img{
         margin-left: 2rem;
@@ -45,6 +59,19 @@ export const NavBarHomePage = styled.div`
 
     #nav-icon:hover {
         fill: red;
+    }
+
+    .containerCurrentUser{
+        max-width: 250px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        justify-content: space-between;
+        p{
+            font-size: 2rem;
+            color: white;
+            letter-spacing: 2px;
+        }
     }
 
     span{

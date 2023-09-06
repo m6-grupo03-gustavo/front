@@ -18,7 +18,11 @@ import { ModalRemoveUser } from "../../components/Modals/ModalRemoveUser"
 
 
 export const Dashboard = () =>{
-    const { setModal, user, setUser, dashboardCars, setDashboardCars, setModalUpdateAdress, setModalUpdateUserInfo, setModalRemoveUser } = useAuth()
+    const { setModal, user, setUser, dashboardCars, setDashboardCars, setModalUpdateAdress, setModalUpdateUserInfo, setModalRemoveUser, setCurrentUser } = useAuth()
+
+    useEffect(() => {
+        setCurrentUser(user)    
+    })
 
     useEffect(() => {
         (async () => {

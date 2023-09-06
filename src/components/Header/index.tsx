@@ -11,7 +11,7 @@ import { UserInitials } from "../UserInitials"
 
 
 export const Header = () =>{
-    const { userLogout, user  } = useAuth()
+    const { userLogout, user, currentUser  } = useAuth()
     const [isOpenNavButtons, setIsOpenNavButtons] = useState(false)
     const navigate = useNavigate()
     const [width, setWidth] = useState(window.innerWidth);
@@ -31,8 +31,72 @@ export const Header = () =>{
           window.removeEventListener("resize", handleResize);
         };
       }, []);
+     
+    if(currentUser != null && location.pathname == '/'  ){
+        return(
+            <>
+                <NavBarHomePage>
+                    <h1>Motors <small>Shop</small></h1> 
+                    <div className="containerCurrentUser">
+                        <UserInitials userId={currentUser.id} userName={currentUser.name}/>
+                        {width > 600? <p>{currentUser.name}</p>: <></>}
+                    
+                        {
+                          !isOpenNavButtons ? <div className="containerToggle"  onClick={() => setIsOpenNavButtons(!isOpenNavButtons)}><FaBars size={25} style={{
+                            color:  "#fff",
+                            margin: "0"
+                        }}/></div>  
+                        : 
+                        <div className="containerToggle"   onClick={() => setIsOpenNavButtons(!isOpenNavButtons)}><AiOutlineClose size={25} style={{
+                            color:  "#fff",
+                            margin: "0"
+                        }}/></div>  
+                      }
+                        
+                    </div>
 
-      if(width <= 1200 && location.pathname == '/'){
+                </NavBarHomePage>
+                    {
+                      isOpenNavButtons && <NavButtons/>
+                  }
+            </>
+        )
+      }
+      else if(currentUser != null ){
+        return(
+            <>
+                  
+                <NavBar>
+                    
+                    <img src="/Logo.svg" onClick={() => navigate("/")}/>
+
+                    <div className="containerCurrentUser">
+                        <UserInitials userId={currentUser.id} userName={currentUser.name}/>
+                        {width > 600? <p>{currentUser.name}</p>: <></>}
+                        {
+                          !isOpenNavButtons ? <div className="containerToggle"  onClick={() => setIsOpenNavButtons(!isOpenNavButtons)}><FaBars size={25} style={{
+                            color:  "#000",
+                            margin: "0"
+                        }}/></div>  
+                        : 
+                        <div className="containerToggle"   onClick={() => setIsOpenNavButtons(!isOpenNavButtons)}><AiOutlineClose size={25} style={{
+                            color:  "#000",
+                            margin: "0"
+                        }}/></div>  
+                      }
+                        
+                    </div>
+
+
+                </NavBar>
+                {
+                      isOpenNavButtons && <NavButtons/>
+                  }
+
+            </>
+        )
+      }
+      else if(width <= 1200 && location.pathname == '/'){
         
           return(
               <>
