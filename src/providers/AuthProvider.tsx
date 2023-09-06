@@ -183,11 +183,8 @@ interface iAuthContextValues {
     setEmaiModal: React.Dispatch<SetStateAction<boolean>>
     emailModal: boolean
     car: ICar | null
-<<<<<<< HEAD
-    setCar: React.Dispatch<SetStateAction<null | ICar>>
-    registerComment: (data: IRegisterComment) => Promise<void>
-=======
     setCar: React.Dispatch<SetStateAction<ICar | null>>
+    registerComment: (data: IRegisterComment, id: number) => Promise<void>
     modalRemoveUser: boolean
     setModalRemoveUser: React.Dispatch<SetStateAction<boolean>>
     userRemove: (id: number) => Promise<void>
@@ -204,7 +201,6 @@ interface iAuthContextValues {
     setCarsTableFIPE: React.Dispatch<SetStateAction<IAllCarFIPE | null>>
     carsTableFIPEByBranch: ICarFIPEDetail[] | null
     setCarsTableFIPEByBranch: React.Dispatch<SetStateAction<ICarFIPEDetail[] | null>>
->>>>>>> a49ff9ea04e2f8605a84aa8e95ec3655c681da56
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -452,9 +448,6 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             emailModal,
             car,
             setCar,
-<<<<<<< HEAD
-            registerComment
-=======
             modalRemoveUser,
             setModalRemoveUser,
             userRemove,
@@ -462,8 +455,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             carsTableFIPE,
             setCarsTableFIPE,
             carsTableFIPEByBranch,
-            setCarsTableFIPEByBranch
->>>>>>> a49ff9ea04e2f8605a84aa8e95ec3655c681da56
+            setCarsTableFIPEByBranch,
+            registerComment,
         }}>
             {children}
         </AuthContext.Provider>

@@ -12,6 +12,7 @@ export const StyleCardCar =  styled.li`
     justify-content: space-between;
     .containerTools{
         display: flex;
+        align-items: center;
         gap: 10px;
     }
 
