@@ -40,8 +40,6 @@ export const CarImages = z.object({
 export const schemaRegisterCar = z.object({
     brand: z.string(),
     model: z.string(),
-    year: z.string(),
-    fuel: z.string(),
     value: z.string(),
     description: z.string(),
     color: z.string(),
@@ -133,6 +131,91 @@ export const SchemaUpdatePassword = z.object({
     
     export type IUpdatePasswordProvider = z.infer<typeof SchemaUpdatePasswordProvider>
 
+    export const schemaUpdateCar = z.object({
+        brand: z.string().optional(),
+        model: z.string().optional(),
+        year: z.string().optional(),
+        fuel: z.string().optional(),
+        value: z.string().optional(),
+        description: z.string().optional(),
+        color: z.string().optional(),
+        km: z.string().optional(),
+        carImages: z.string().optional(),
+        is_published: z.string().optional()
+    })
+    
+    export type IUpdateCarFormData =  {
+        brand: string
+        model: string
+        year: string
+        fuel: string
+        value: number | string
+        description: string
+        color: string
+        km: number | string
+        carImages: IImageRequest[] | string
+        is_published: boolean | string
+    }
 
-  
+    export const isPublisehdOptions = [
+        { value: 'true', label: 'Sim' },
+        { value:'false', label: 'Não' },
+      ]
+
+    export const colorOptions = [
+        { value: 'amarelo', label: 'Amarelo' },
+        { value: 'azul', label: 'Azul' },
+        { value: 'bege', label: 'Bege' },
+        { value: 'branco', label: 'Branco' },
+        { value: 'cinza', label: 'Cinza' },
+        { value: 'prata', label: 'Prata' },
+        { value: 'preto', label: 'Preto' },
+        { value: 'verde', label: 'Verde' },
+        { value: 'vermelho', label: 'Vermelho' },
+      ];
+
+     export  const brandOptions = [
+        { value: 'chevrolet', label: 'Chevrolet' },
+        { value: 'citroën', label: 'Citroën' },
+        { value: 'fiat', label: 'Fiat' },
+        { value: 'ford', label: 'Ford' },
+        { value: 'honda', label: 'Honda' },
+        { value: 'hyundai', label: 'Hyundai' },
+        { value: 'nissan', label: 'Nissan' },
+        { value: 'peugeot', label: 'Peugeot' },
+        { value: 'renault', label: 'Renault' },
+        { value: 'toyota', label: 'Toyota' },
+        { value: 'volkswagen', label: 'Volkswagen' },
+      ]
+    //All
+    //  export  const brandOptions = [
+    //     { value: 'audi', label: 'Audi' },
+    //     { value: 'BMW', label: 'BMW' },
+    //     { value: 'caoa chery', label: 'Caoa Chery' },
+    //     { value: 'chevrolet', label: 'Chevrolet' },
+    //     { value: 'citroën', label: 'Citroën' },
+    //     { value: 'fiat', label: 'Fiat' },
+    //     { value: 'ferrari', label: 'Ferrari' },
+    //     { value: 'ford', label: 'Ford' },
+    //     { value: 'honda', label: 'Honda' },
+    //     { value: 'hyundai', label: 'Hyundai' },
+    //     { value: 'jeep', label: 'Jeep' },
+    //     { value: 'kia', label: 'Kia' },
+    //     { value: 'land rover', label: 'Land Rover' },
+    //     { value: 'mercedes-benz', label: 'Mercedes-Benz' },
+    //     { value: 'mitsubishi', label: 'Mitsubishi' },
+    //     { value: 'nissan', label: 'Nissan' },
+    //     { value: 'porsche', label: 'Porsche' },
+    //     { value: 'peugeot', label: 'Peugeot' },
+    //     { value: 'renault', label: 'Renault' },
+    //     { value: 'toyota', label: 'Toyota' },
+    //     { value: 'volvo', label: 'Volvo' },
+    //     { value: 'volkswagen', label: 'Volkswagen' },
+    //   ]
+
+     export const fuelOptions = [
+        { value: '1', label: 'Gasolina' },
+        { value: '2', label: 'Flex' },
+        { value: '3', label: 'Elétrico' },
+      ]
 

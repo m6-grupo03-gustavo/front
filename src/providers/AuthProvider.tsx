@@ -22,6 +22,7 @@ import {
 
 
 
+
 interface iAuthProviderProps {
     children: ReactNode
 }
@@ -86,6 +87,7 @@ export interface ICar {
     is_published: boolean
     user_id: number
     carImages: IImage[]
+    user: IRegisterResponse
 }
 
 export interface IResponseGetCars{
@@ -94,6 +96,37 @@ export interface IResponseGetCars{
     count: number
     data: ICar[]
 }
+
+
+// interface carsFIPE
+export interface ICarFIPE{
+    name: string
+}
+
+export interface IAllCarFIPE{
+    chevrolet: ICarFIPE[]
+    citroën: ICarFIPE[]
+    fiat: ICarFIPE[]
+    ford: ICarFIPE[]
+    honda: ICarFIPE[]
+    hyundai: ICarFIPE[]
+    nissan: ICarFIPE[]
+    peugeot: ICarFIPE[]
+    renault: ICarFIPE[]
+    toyota: ICarFIPE[]
+    volkswagen: ICarFIPE[]
+}
+
+export interface ICarFIPEDetail{
+    id: string
+    name: string
+    bran: string
+    year: string
+    fuel: 1 | 2 | 3
+    value: number
+}
+
+
 
 interface iAuthContextValues {
     modal: string
@@ -150,8 +183,28 @@ interface iAuthContextValues {
     setEmaiModal: React.Dispatch<SetStateAction<boolean>>
     emailModal: boolean
     car: ICar | null
+<<<<<<< HEAD
     setCar: React.Dispatch<SetStateAction<null | ICar>>
     registerComment: (data: IRegisterComment) => Promise<void>
+=======
+    setCar: React.Dispatch<SetStateAction<ICar | null>>
+    modalRemoveUser: boolean
+    setModalRemoveUser: React.Dispatch<SetStateAction<boolean>>
+    userRemove: (id: number) => Promise<void>
+    carUpdate: (data: IUpdateUserInfo, id: number) => Promise<{
+        name?: string | undefined;
+        email?: string | undefined;
+        phone?: string | undefined;
+        cpf?: string | undefined;
+        birthdate?: string | undefined;
+        description?: string | undefined;
+        request?: ICar;
+    } | undefined>
+    carsTableFIPE: IAllCarFIPE | null
+    setCarsTableFIPE: React.Dispatch<SetStateAction<IAllCarFIPE | null>>
+    carsTableFIPEByBranch: ICarFIPEDetail[] | null
+    setCarsTableFIPEByBranch: React.Dispatch<SetStateAction<ICarFIPEDetail[] | null>>
+>>>>>>> a49ff9ea04e2f8605a84aa8e95ec3655c681da56
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -172,9 +225,11 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     const [modalRegisterAdSucess, setModalRegisterAdSucess] = useState(false)
     const [modalUpdateAdress, setModalUpdateAdress] = useState(false)
     const [modalUpdateUserInfo, setModalUpdateUserInfo] = useState(false)
-    const [car, setCar] = useState(null)
+    const [car, setCar] = useState<ICar | null>(null)
+    const [modalRemoveUser, setModalRemoveUser] = useState(false)
 
-
+    const [carsTableFIPE, setCarsTableFIPE ] = useState<IAllCarFIPE | null>(null)
+    const [carsTableFIPEByBranch, setCarsTableFIPEByBranch ] = useState<ICarFIPEDetail[] | null>(null)
 
     useEffect(() => {
         const token = localStorage.getItem("@fipe:token")
@@ -247,6 +302,33 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         } catch (error) {
             console.error(error)
             toast.error('...')
+        }
+    }
+
+    const userRemove = async (id: number) =>{
+        try {
+            const token = localStorage.getItem("@fipe:token")
+            api.defaults.headers.common.Authorization = `Bearer ${token}`
+            await api.delete<ICar>(`/user/${id}`)
+            toast.success('Usuário deletado com sucesso')
+            window.localStorage.removeItem("@fipe:token")
+            navigate('/')
+        } catch (error) {
+            console.error(error)
+            toast.error('...')
+        }
+    }
+
+    const carUpdate= async (data: IUpdateUserInfo, id: number) =>{
+        try {
+            const token = localStorage.getItem("@fipe:token")
+            api.defaults.headers.common.Authorization = `Bearer ${token}`
+            const response = await api.patch(`/car/${id}`, data)
+            toast.success('Car updated successfully')
+            return {...response, ...data}
+        } catch (error) {
+            toast.error('Unable to update')
+            console.error(error)
         }
     }
 
@@ -370,7 +452,18 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             emailModal,
             car,
             setCar,
+<<<<<<< HEAD
             registerComment
+=======
+            modalRemoveUser,
+            setModalRemoveUser,
+            userRemove,
+            carUpdate,
+            carsTableFIPE,
+            setCarsTableFIPE,
+            carsTableFIPEByBranch,
+            setCarsTableFIPEByBranch
+>>>>>>> a49ff9ea04e2f8605a84aa8e95ec3655c681da56
         }}>
             {children}
         </AuthContext.Provider>

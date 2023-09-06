@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 
-export const StyledContainerFormRegisterCar = styled.section`
+export const StyledContainerFormUpdateCar = styled.section`
     form{
         width: 32rem;
         display: flex;
@@ -31,19 +31,6 @@ export const StyledContainerFormRegisterCar = styled.section`
             align-items: center;
             gap: 15px;
             max-width: 88%;
-
-        }
-
-        .containerValueFIPE{
-            background-color: black;
-            color: var(--grey5);
-            font-size: var(--font-size-4);
-            width: 110px;
-            height: 40px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
     }
 
