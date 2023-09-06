@@ -2,15 +2,23 @@ import { useEffect, useState } from "react"
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
 import { UserInitials } from "../../components/UserInitials"
-import { CarDescription, CarImages, CarInfo, CarMainImage, Container, ProfileCard } from "./styles"
+import { CarDescription, CarImages, CarInfo, CarMainImage, CommentsSection, Container, PostCommentSection, ProfileCard } from "./styles"
 import { api } from "../../service/api"
 import { Link } from "react-router-dom"
 import { useAuth } from "../../hooks/useAuth"
+import { Comment } from "../../components/Comment"
+import FormComment from "../../components/form/FormComments"
 
+export interface IComment {
+   id: string
+   comment: string
+   register_date: Date
+}
 
 export const ProductPage = () => {
     const [token, setToken]: any = useState(false)
-    const {car, setCar} = useAuth()
+    const [comments, setComments] = useState<IComment[] | null>(null)
+    const {car, setCar, user} = useAuth()
 
     useEffect(() => {
         (async () => {
@@ -20,53 +28,99 @@ export const ProductPage = () => {
 
                     const responseCar = await api.get(`car/${car.id}`)
                     setCar(responseCar.data)
-                    console.log(car.carImages[0].url)
+
+                    const responseComments = await api.get(`comments/${car.id}`)
+                    setComments(responseComments.data)
             } catch (error) {
                 console.error(error)
             }
         })()
-    }, [token])
-    
+    }, [token, comments])
+     
     if (car !== null) {
         return (
             <>
                 <Header/>
                 <Container>
                     <div id="theme_color"></div>
-                    
-                    <CarMainImage>
-                        <img src={car.carImages[0].url} alt={car.model} />
-                    </CarMainImage>
-    
-                    <div className="sections_container">
-                        <CarInfo>
-                            <h1>{car.brand} {car.model}</h1>
-                            <div className="tags_container">
-                                <span>{car.year}</span>
-                                <span>{car.km} KM</span>
-                            </div>
-                            <p>R$ {car.value},00</p>
-                            {
-                                token ?
-                                <button>Comprar</button>
-                                :
-                                <Link to={"/login"}>Comprar</Link>
-                            }
-                        </CarInfo>
-                        <CarDescription>
-                            <h1>Descrição</h1>
-                            <p>{car.description}</p>
-                        </CarDescription>
-                        <CarImages>
-                            <h1>Fotos</h1>
-                        </CarImages>
-                        <ProfileCard>
-                            <UserInitials userId={1} userName={"Samuel Leão"}/>
-                            <h1>Samuel Leão</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum magnam similique molestias cumque? Neque, temporibus sequi odio amet culpa est excepturi quaerat inventore ducimus nulla? Quo quis earum itaque eius?</p>
-                            <Link to={"/"} className="see_all_ads_button">Ver todos os anúncios</Link>
-                        </ProfileCard>
+
+
+
+                    <div className="container_main_sections">
+
+                        <div className="section_one">
+
+                            <CarMainImage>
+                                <img src={car.carImages[0].url} alt={car.model} />
+                            </CarMainImage>
+
+                            <div className="sections_container">
+                                <CarInfo>
+                                    <h1>{car.brand} {car.model}</h1>
+                                    <div className="tags_container">
+                                        <span>{car.year}</span>
+                                        <span>{car.km} KM</span>
+                                    </div>
+                                    <p>R$ {car.value},00</p>
+                                    {
+                                        token ?
+                                        <button>Comprar</button>
+                                        :
+                                        <Link to={"/login"}>Comprar</Link>
+                                    }
+                                </CarInfo>
+                                <CarDescription>
+                                    <h1>Descrição</h1>
+                                    <p>{car.description}</p>
+                                </CarDescription>
+
+                                <CommentsSection>
+                                    <h1>Comentários</h1>
+                                    <ul>
+                                        {comments?.map((comment) => <Comment key={comment.id} comment={comment}/>)}
+                                    </ul>
+                                </CommentsSection>
+                                <PostCommentSection>
+                                    <div className="post_comment_header">
+                                        {user ? <> <UserInitials userId={user.id} userName={user.name}/> <h2>{user.name}</h2> </> : <h2>Faça o login para comentar</h2>}
+                                    </div>
+                                    <FormComment/>
+                                    <div className="sugestions_container">
+                                        <span>Gostei muito!</span>
+                                        <span>Incrível</span>
+                                        <span>Recomendarei para meus amigos!</span>
+                                    </div>
+                                </PostCommentSection>
+                        </div>
+
+
+
+                        
+                        </div>
+
+                        <div className="section_two">
+
+
+                                <CarImages>
+                                    <h1>Fotos</h1>
+                                </CarImages>
+
+                                <ProfileCard>
+                                    <UserInitials userId={car.user.id} userName={car.user.name}/>
+                                    <h1>{car.user.name}</h1>
+                                    <p>{car.user.description}</p>
+                                    <Link to={"/dashboard"} className="see_all_ads_button">Ver todos os anúncios</Link>
+                                </ProfileCard>
+                        </div>
+                        
                     </div>
+
+
+
+
+
+                    
+                    
                 </Container>
                 <Footer/>
             </>

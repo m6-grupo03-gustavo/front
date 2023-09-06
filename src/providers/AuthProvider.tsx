@@ -17,6 +17,7 @@ import {
     IUpdateAdressFormData, 
     IUpdateUserInfo,
     IUpdatePassword,
+    IRegisterComment,
 } from "../components/Form/validator";
 
 
@@ -150,6 +151,7 @@ interface iAuthContextValues {
     emailModal: boolean
     car: ICar | null
     setCar: React.Dispatch<SetStateAction<null | ICar>>
+    registerComment: (data: IRegisterComment) => Promise<void>
 }
 
 export const AuthContext = createContext({} as iAuthContextValues)
@@ -317,6 +319,16 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         }
     }
 
+    const registerComment = async (data : IRegisterComment, id: number) => {
+        try{
+            await api.post<IRegisterComment>(`/comments/${id}`, data)
+            toast.success('Comment created successfully')
+        }catch (error){
+            toast.error('Comentário excedeu o limite de caracteres')
+            console.error(error)
+        }
+    }  
+
     return (
         <AuthContext.Provider value={{ 
             modal,
@@ -357,7 +369,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             setEmaiModal,
             emailModal,
             car,
-            setCar
+            setCar,
+            registerComment
         }}>
             {children}
         </AuthContext.Provider>

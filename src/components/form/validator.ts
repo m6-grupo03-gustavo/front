@@ -11,6 +11,10 @@ export const schemaLogin = z.object({
     password: z.string().nonempty("Senha é obrigatória")
 })
 
+export const schemaComment = z.object({
+    comment: z.string()
+})
+
 export const schemaRegister = z.object({
     name: z.string(),
     email: z.string().email("e-mail invalido"),
@@ -56,6 +60,9 @@ const schemaRegisterWithoutPassword = schemaRegister.omit({ password: true });
 
 export type IRegisterUserResponseFormData = z.infer<typeof schemaRegisterWithoutPassword>;
 
+export type IRegisterComment = z.infer<typeof schemaComment>;
+
+
 
 
 export  interface IImageRequest{
@@ -75,9 +82,7 @@ export type IRegisterCarFormData = {
         is_published: boolean,
         description: string
         carImages: IImageRequest[]
-    }
-    
-    
+    }    
     
     export const schemaUpdateAdress = z.object({
         zipcode: z.string().optional(),
