@@ -15,6 +15,7 @@ import { AiFillDelete } from 'react-icons/ai'
 import { BiSolidEditAlt } from 'react-icons/bi'
 import { useAuth } from "../../../hooks/useAuth"
 import { ModalUpdateCar } from "../../Modals/ModalUpdateCar"
+import { BtnAnchor } from "../../Buttons/btnAnchor"
 
 interface ICarCardProps {
     car: ICar
@@ -74,6 +75,7 @@ export default function CardCar({car, renderOnAnotherPage}: ICarCardProps){
                                         cursor: 'pointer'
                         }}/>
                     </div>
+                    <BtnAnchor text='Ver Detalhe' url='/product' typeStyle='white' onClick={() => navigateCar()}/>
 
                 </div>
                 {modalRemoveAdOpen && <ModalRemoveAd 
