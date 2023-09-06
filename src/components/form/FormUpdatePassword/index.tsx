@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { IUpdatePassword, SchemaUpdatePassword } from "../validator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import InputOutlined from "../Input";
+import InputOutlined from "../input";
 import { BtnSubmit } from "../../Buttons/btnSubmit";
 import { useAuth } from "../../../hooks/useAuth";
 import { StyledContainerFormUpdatePassword } from "./style";

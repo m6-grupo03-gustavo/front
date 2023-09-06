@@ -1,6 +1,6 @@
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { StyledContainerFormUpdateCar } from "./style"
-import InputOutlined from '../Input';
+import InputOutlined from '../input';
 import { IUpdateCarFormData, colorOptions, isPublisehdOptions, schemaUpdateCar } from '../validator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BtnSubmit } from '../../Buttons/btnSubmit';
