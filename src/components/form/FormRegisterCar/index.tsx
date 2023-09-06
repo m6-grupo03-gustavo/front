@@ -9,6 +9,7 @@ import SelectOutlined from '../Select';
 import { useEffect, useState } from 'react';
 import { apiFipe } from '../../../service/apiFipe';
 import { IAllCarFIPE, ICarFIPE, ICarFIPEDetail } from '../../../providers/AuthProvider';
+import { formatFuelNumber } from '../../../utils/formatFuel';
 
 
 export default function FomrRegisterCar (){
@@ -75,17 +76,7 @@ export default function FomrRegisterCar (){
         setOptionsBrand(format)
     };
 
-    const formatFuelNumber = (number: 1 | 2 | 3) => {
-        if(number == 1){
-            return 'Gasolina'
-        }
-        else if( number == 2){
-            return 'Elétrico'
-        }
-        else{
-            return 'Flex'
-        }
-    };
+
 
     
     useEffect(() => {
@@ -166,8 +157,8 @@ export default function FomrRegisterCar (){
                 {errors.model && <p>{errors.model.message}</p>}
              
                 <div>
-                    {currentCar == null ? <span className='containerValueFIPE'> Ano </span> : <span className='containerValueFIPE'>{currentCar.year}</span>}
-                    {currentCar == null ? <span className='containerValueFIPE'> Combustivel </span> : <span className='containerValueFIPE'>{formatFuelNumber(currentCar.fuel)}</span>}
+                    {currentCar == null ? <span className='containerValueFIPE'> Ano </span> : <span className='containerValueFIPEFocus'>{currentCar.year}</span>}
+                    {currentCar == null ? <span className='containerValueFIPE'> Combustivel </span> : <span className='containerValueFIPEFocus'>{formatFuelNumber(currentCar.fuel)}</span>}
                 </div>
 
                 <div>
@@ -182,7 +173,7 @@ export default function FomrRegisterCar (){
                     {errors.value && <p>{errors.value.message}</p>}
 
                     <div>
-                        {currentCar == null ? <span className='containerValueFIPE'> Valor </span> : <span className='containerValueFIPE'>R${currentCar.value},00</span> }
+                        {currentCar == null ? <span className='containerValueFIPE'> R$ </span> : <span className='containerValueFIPEFocus'>R$  {currentCar.value},00</span> }
                     </div> 
 
                 </div>
